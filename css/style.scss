@@ -1,17 +1,90 @@
 @use "catppuccin";
 @use "theme";
 
-:root
-{
-	font-family: theme.$primary-font;
-	color: theme.$text;
-}
+// : root
+// {
+// 	font-family: theme.$primary-font;
+// 	color: theme.$text;
+// }
+
+// body
+// {
+// 	margin: 0 auto;
+// 	background-color: theme.$base;
+// 	min-height: 100%;
+// 	/* padding: theme.$useless-gap 0; */
+// }
 
 body
 {
-	margin: 0 auto;
-	background-color: theme.$base;
-	min-height: 100%;
-	/* padding: theme.$useless-gap 0; */
+	background: #CDDC39;
+	font-family: 'Arimo', sans-serif;
 }
 
+.wrapper
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.tab
+{
+	cursor: pointer;
+	padding: 10px 20px;
+	margin: 0px 2px;
+	background: #000;
+	display: inline-block;
+	color: #fff;
+	border-radius: 3px 3px 0px 0px;
+	box-shadow: 0 0.5rem 0.8rem #00000080;
+}
+
+.panels
+{
+	background: #fffffff6;
+	box-shadow: 0 2rem 2rem #00000080;
+	min-height: 200px;
+	width: 100%;
+	max-width: 500px;
+	border-radius: 3px;
+	overflow: hidden;
+	padding: 20px;
+}
+
+.panel
+{
+	display: none;
+	animation: fadein .8s;
+}
+
+@keyframes fadein
+{
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+.radio
+{
+	display: none;
+}
+
+#btn_1:checked ~ .panels #panel_1,
+#btn_2:checked ~ .panels #panel_2,
+#btn_3:checked ~ .panels #panel_3
+{
+	display: block;
+}
+
+#btn_1:checked ~ .tabs #tab_1,
+#btn_2:checked ~ .tabs #tab_2,
+#btn_3:checked ~ .tabs #tab_3
+{
+	background: #fffffff6;
+	color: #000;
+	border-top: 3px solid #000;
+}
