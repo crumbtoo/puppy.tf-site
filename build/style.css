@@ -1,0 +1,60 @@
+/* funny cat colours :3 */
+/* NF icons */
+@import "nf.css";
+/* hackNF mono font */
+@import "hack-nerd-font-mono.css";
+:root {
+  --cat-accent: $blue;
+  --useless-gap: 8px;
+  --border-radius: 4px;
+  font-family: "hackNF", monospace;
+}
+
+html {
+  /* height: 100%; */
+}
+
+body {
+  margin: 0 auto;
+  background-color: #eff1f5;
+  min-height: 100%;
+  /* padding: var(--useless-gap) 0; */
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+:-moz-placeholder {
+  font-style: italic;
+}
+
+::-moz-placeholder {
+  font-style: italic;
+}
+
+:-ms-input-placeholder {
+  font-style: italic;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.box {
+  text-align: center;
+  margin: 0 auto;
+  color: #4c4f69;
+  padding: var(--useless-gap);
+  border-radius: var(--border-radius);
+  background-color: #dce0e8;
+  font-family: "hackNF", monospace;
+}
+
+/*# sourceMappingURL=style.css.map */
