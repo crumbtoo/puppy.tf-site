@@ -1,7 +1,17 @@
 @use "catppuccin";
+@use "theme";
 
-h1
+:root
 {
-	text-color: catppuccin.$text;
+	font-family: theme.$primary-font;
+	color: theme.$text;
+}
+
+body
+{
+	margin: 0 auto;
+	background-color: theme.$base;
+	min-height: 100%;
+	/* padding: theme.$useless-gap 0; */
 }
 

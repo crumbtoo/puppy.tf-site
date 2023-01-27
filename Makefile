@@ -4,10 +4,14 @@ SRC_DIR := src
 CSS_SRC := $(wildcard css/*.css)
 CSS_OUT := $(patsubst css/%.css, $(BUILD_DIR)/%.css, $(CSS_SRC))
 
-SCSS_SRC := $(wildcard css/*.scss)
+SCSS_SRC := $(shell ls css/*.scss | grep -v 'css/_')
 SCSS_OUT := $(patsubst css/%.scss, $(BUILD_DIR)/%.css, $(SCSS_SRC))
 
-all: $(BUILD_DIR)/script.js $(BUILD_DIR)/style.css $(CSS_OUT)
+SCSS_FLAGS := --style=compressed \
+			  --no-error-css \
+			  --stop-on-error
+
+all: $(BUILD_DIR)/script.js $(SCSS_OUT) $(CSS_OUT)
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR) || true
@@ -16,15 +20,13 @@ $(BUILD_DIR)/script.js: $(SRC_DIR)/main.ts
 	tsc -b tsconfig.json
 
 $(SCSS_OUT): $(BUILD_DIR)/%.css: css/%.scss
-	sass $< $@
+	sass $(SCSS_FLAGS) $< $@
 
 $(CSS_OUT): $(BUILD_DIR)/%.css: css/%.css
 	cp $< $@
 
-.PHONY:
-list: $(CSS_OUT)
-	@echo $?
-
+test:
+	@echo $(SCSS_SRC)
 
 .PHONY:
 clean:
