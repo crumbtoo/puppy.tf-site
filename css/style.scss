@@ -3,21 +3,23 @@
 
 // : root
 // {
-// 	font-family: theme.$primary-font;
-// 	color: theme.$text;
+	// 	font-family: theme.$primary-font;
+	// 	color: theme.$text;
 // }
 
 // body
 // {
-// 	margin: 0 auto;
-// 	background-color: theme.$base;
-// 	min-height: 100%;
-// 	/* padding: theme.$useless-gap 0; */
+	// 	margin: 0 auto;
+	// 	background-color: theme.$base;
+	// 	min-height: 100%;
+	// 	/* padding: theme.$useless-gap 0; */
 // }
 
 body
 {
 	background: theme.$base;
 	font-family: theme.$primary_font;
+	color: theme.$text;
+	line-height: 1.618em;
 }
 

@@ -1,74 +1,102 @@
 @use "catppuccin";
 @use "theme";
 
-.cfg-nav-wrapper
+/* stealed the https://codepen.io/tutsplus/pen/VLeXqy */
+.cfg-make-wrapper
 {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	max-width: 50rem;
+	width: 100%;
+	margin: 0 auto;
 
-	.radio
+	*
 	{
-		display: none;
+		box-sizing: border-box;
 	}
 
 	.tabs
 	{
 		display: flex;
+		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: around-evenly;
-		align-items: center;
+		justify-content: start;
+
+		position: relative;
+		margin: 3rem 0;
+		height: 14.75rem;
 
 		.tab
 		{
-			cursor: pointer;
-			padding: 4px 4px;
-			margin: 0px 16px;
-			display: inline-block;
-			color: theme.$text;
+			float: left;
 		}
-	}
 
-	.panels
-	{
-		background: theme.$crust;
-		box-shadow: 0 2rem 2rem #00000080;
-		min-height: 200px;
-		width: 100%;
-		max-width: 500px;
-		border-radius: 3px;
-		overflow: hidden;
-		padding: 20px;
-
-		.panel
+		.tab-switch
 		{
 			display: none;
-			animation: fadein .8s;
-			@keyframes fadein
-			{
-				from {
-					opacity:0;
-				}
-				to {
-					opacity:1;
-				}
-			}
+		}
+
+		.tab-label
+		{
+			position: relative;
+			display: block;
+			line-height: 2.75em;
+			height: 3em;
+			padding: 0 1.618em;
+			background: theme.$surface0;
+			margin-right: 4px;
+			color: theme.$subtext1;
+			cursor: pointer;
+			top: 0;
+			// transition: all 0.25s;
+
+		}
+		.tab-label:hover
+		{
+			top: -0.25rem;
+			// transition: top 0.25s;
+		}
+
+		.tab-panel
+		{
+			min-height: 12rem;
+			position: absolute;
+			z-index: 1;
+			top: 2.75em;
+			left: 0;
+			padding: 1.618rem;
+			background: theme.$mantle;
+			opacity: 0;
+			// transition: all 0.35s;
+			width: 100%;
+		}
+
+		.tab-switch:checked + .tab-label
+		{
+			background: theme.$mantle;
+			color: theme.$text;
+			border-bottom: 0;
+			// border-right: 0.125rem solid #fff;
+			// transition: all 0.35s;
+			z-index: 1;
+			top: -0.2rem;
+		}
+
+		.tab-switch:checked + label + .tab-panel
+		{
+			z-index: 2;
+			opacity: 1;
+			// transition: all 0.35s;
 		}
 	}
 
-	#btn_binds:checked ~ .panels #panel_binds,
-	#btn_2:checked ~ .panels #panel_2,
-	#btn_3:checked ~ .panels #panel_3
+	.tabs::before,
+	.tabs::after
 	{
-		display: block;
+		content: "";
+		display: table;
 	}
 
-	#btn_binds:checked ~ .tabs #tab_binds,
-	#btn_2:checked ~ .tabs #tab_2,
-	#btn_3:checked ~ .tabs #tab_3
+	.tabs::after
 	{
-		border-bottom: 3px inset theme.$text;
-		margin-bottom: 2px;
+		clear: both;
 	}
 }
-
