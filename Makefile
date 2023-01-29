@@ -4,6 +4,7 @@ SRC_DIR := src
 CSS_SRC := $(wildcard css/*.css)
 CSS_OUT := $(patsubst css/%.css, $(BUILD_DIR)/%.css, $(CSS_SRC))
 
+SCSS_PARTIALS := $(shell ls css/*.scss | grep 'css/_')
 SCSS_SRC := $(shell ls css/*.scss | grep -v 'css/_')
 SCSS_OUT := $(patsubst css/%.scss, $(BUILD_DIR)/%.css, $(SCSS_SRC))
 
@@ -19,7 +20,7 @@ $(BUILD_DIR):
 $(BUILD_DIR)/script.js: $(SRC_DIR)/main.ts
 	tsc -b tsconfig.json
 
-$(SCSS_OUT): $(BUILD_DIR)/%.css: css/%.scss
+$(SCSS_OUT): $(BUILD_DIR)/%.css: css/%.scss $(SCSS_PARTIALS)
 	sass $(SCSS_FLAGS) $< $@
 
 $(CSS_OUT): $(BUILD_DIR)/%.css: css/%.css
