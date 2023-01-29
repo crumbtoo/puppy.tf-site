@@ -22,8 +22,8 @@
 		.tab
 		{
 			cursor: pointer;
-			padding: 0px 0px;
-			margin: 4px 20px;
+			padding: 4px 4px;
+			margin: 0px 16px;
 			display: inline-block;
 			color: theme.$text;
 		}
@@ -56,19 +56,19 @@
 		}
 	}
 
-	// #btn_1:checked ~ .panels #panel_1,
-	// #btn_2:checked ~ .panels #panel_2,
-	// #btn_3:checked ~ .panels #panel_3
-	// {
-	// 	display: block;
-	// }
+	#btn_binds:checked ~ .panels #panel_binds,
+	#btn_2:checked ~ .panels #panel_2,
+	#btn_3:checked ~ .panels #panel_3
+	{
+		display: block;
+	}
 
-	// #btn_1:checked ~ .tabs #tab_1,
-	// #btn_2:checked ~ .tabs #tab_2,
-	// #btn_3:checked ~ .tabs #tab_3
-	// {
-	// 	border-bottom: 3px inset theme.$text;
-	// 	margin-bottom: 6px;
-	// }
+	#btn_binds:checked ~ .tabs #tab_binds,
+	#btn_2:checked ~ .tabs #tab_2,
+	#btn_3:checked ~ .tabs #tab_3
+	{
+		border-bottom: 3px inset theme.$text;
+		margin-bottom: 2px;
+	}
 }
 
