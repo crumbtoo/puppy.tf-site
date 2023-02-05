@@ -16,33 +16,45 @@
 	<body>
 		<script type="module" src="build/script.js"></script>
 
-		<div class="makecfg-tabs">
+		<form>
+			<div class="makecfg-tabs">
+				<input type="radio" name="tabs" id="tab_graphics" checked="checked">
+				<label class="tab-label" for="tab_graphics">graphics</label>
+				<div class="tab">
+					<h1>graphics</h1>
+					<!-- listen you gotta be a little crazy sometimes.
+						if this turns out to be a horrible idea, we can
+						use Jekyll or PHP -->
+#					include "html/makecfg/graphics.html"
+				</div>
 
-			<input type="radio" name="tabs" id="tab_graphics" checked="checked">
-			<label for="tab_graphics">graphics</label>
-			<div class="tab">
-				<h1>graphics</h1>
-<!-- listen you gotta be a little crazy sometimes.
-if this turns out to be a horrible idea, we can
-use Jekyll or PHP -->
-#include "html/makecfg/graphics.html"
+				<input type="radio" name="tabs" id="tabtwo">
+				<label class="tab-label" for="tabtwo">Tab Two</label>
+				<div class="tab">
+					<h1>Tab Two Content</h1>
+					<p>hrrm</p>
+				</div>
+
+				<input type="radio" name="tabs" id="tabthree">
+				<label class="tab-label" for="tabthree">Tab Three</label>
+				<div class="tab">
+					<h1>Tab Three Content</h1>
+					<p>hii</p>
+				</div>
+
+				<div class="credit">
+					<p><u><b>directly</b></u> inspired by <a href="https://cfg.tf/">cfg.tf</a></p>
+					<p>made by
+						<a href="https://steamcommunity.com/id/crumbt00/">madeline ss</a> /
+						<a>sydney</a> /
+						<a href="https://github.com/crumbtoo">crumb</a> /
+						<a>mime girl</a>
+					</p>
+					<p><a href="https://github.com/crumbtoo/puppy.tf-site">site source</a></p>
+				</div>
 			</div>
+		</form>
 
-			<input type="radio" name="tabs" id="tabtwo">
-			<label for="tabtwo">Tab Two</label>
-			<div class="tab">
-				<h1>Tab Two Content</h1>
-				<p>hrrm</p>
-			</div>
-
-			<input type="radio" name="tabs" id="tabthree">
-			<label for="tabthree">Tab Three</label>
-			<div class="tab">
-				<h1>Tab Three Content</h1>
-				<p>hii</p>
-			</div>
-
-		</div>
 	</body>
 </html>
 

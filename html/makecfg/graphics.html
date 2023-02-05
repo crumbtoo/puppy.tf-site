@@ -1,1 +1,15 @@
-<p>my donkey</p>
+<div id="panel-graphics">
+	<label for="cars">graphics preset</label>
+
+	<div class="select-dropdown">
+		<select name="graphics-preset" id="graphics-preset"
+		onchange="this.dataset.chosen = this.value;">
+			<option value="" disabled selected>graphics preset</option>
+			<option value="low">low</option>
+			<option value="medium">medium</option>
+			<option value="high">high</option>
+		</select>
+	</div>
+
+	<p class="preview" id="preview-low">llooow</p>
+</div>

@@ -1,10 +1,10 @@
 @use "catppuccin";
 
 $useless-gap: 8px;
+$small-gap: 4px;
 $primary-font: "hackNF", monospace;
 $border-radius: 4px;
 
-$accent:	catppuccin.$blue;
 
 // $rosewater: catppuccin.$rosewater;
 // $flamingo:  catppuccin.$flamingo;
@@ -50,7 +50,7 @@ $lavender:  catppuccin.$lavender;
 $text:      #dbd1db;
 $subtext1:  #997f97;
 $subtext0:  #bfacbe;
-$overlay2:  catppuccin.$overlay2;
+$overlay2:  #140f14;
 $overlay1:  catppuccin.$overlay1;
 $overlay0:  catppuccin.$overlay0;
 $surface2:  catppuccin.$surface2;
@@ -59,3 +59,4 @@ $surface0:  #1c121c;
 $base:      #2b1c2b;
 $mantle:    #0c080c;
 $crust:     catppuccin.$crust;
+$accent:	#e47de0;

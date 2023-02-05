@@ -1,5 +1,6 @@
 @use "catppuccin";
 @use "theme";
+@use "makecfg_panels";
 
 .makecfg-tabs
 {
@@ -7,19 +8,19 @@
 	flex-wrap: wrap;
 	margin: 0 auto;
 	max-width: 60rem;
-	column-gap: 4px;
+	column-gap: theme.$small-gap;
 
 	*
 	{
 		box-sizing: border-box;
 	}
 
-	label
+	.tab-label
 	{
 		order: 1; // Put the labels first
 		display: block;
 		padding: 1.2rem 0;
-		// margin-right: 0.2rem;
+		margin: theme.$small-gap 0;
 		text-align: center;
 		cursor: pointer;
 		background: theme.$surface0;
@@ -30,6 +31,8 @@
 		transition: opacity 0.3s;
 		flex-grow: 1;
 		max-width: 10rem;
+
+		border-radius: 8px;
 	}
 
 	label:hover
@@ -46,6 +49,8 @@
 		padding: 1rem;
 		background: theme.$surface0;
 		border-radius: theme.$border-radius;
+
+		@include makecfg_panels.panels;
 	}
 
 	input[type="radio"]
@@ -54,11 +59,32 @@
 	}
 	input[type="radio"]:checked + label
 	{
-		// background: theme.$surface0;
 		opacity: 1;
 	}
 	input[type="radio"]:checked + label + .tab
 	{
 		display: block;
+	}
+
+	.credit
+	{
+		order: 100;
+		margin: 0 auto;
+		padding: theme.$useless-gap;
+		text-align: center;
+		color: theme.$subtext1;
+		line-height: 1em;
+
+		a
+		{
+			color: theme.$accent;
+			text-decoration: none;
+		}
+
+		a:hover
+		{
+			cursor: pointer;
+			text-decoration: underline;
+		}
 	}
 }
