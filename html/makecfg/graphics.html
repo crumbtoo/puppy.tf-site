@@ -1,15 +1,18 @@
 <div id="panel-graphics">
 	<label for="cars">graphics preset</label>
 
-	<div class="select-dropdown">
-		<select name="graphics-preset" id="graphics-preset"
-		onchange="this.dataset.chosen = this.value;">
-			<option value="" disabled selected>graphics preset</option>
+	<select class="select-dropdown"
+	name="graphics-preset" id="graphics-preset" onchange="this.dataset.chosen = this.value;">
+		<option value="" disabled selected>graphics preset</option>
+
+		<optgroup label="mastercomfig">
 			<option value="low">low</option>
 			<option value="medium">medium</option>
 			<option value="high">high</option>
-		</select>
-	</div>
+		</optgroup>
+	</select>
 
 	<p class="preview" id="preview-low">llooow</p>
+	<p class="preview" id="preview-medium">meed</p>
+	<p class="preview" id="preview-high">hiigh</p>
 </div>

@@ -23,20 +23,32 @@ body
 	line-height: 1.618em;
 }
 
+*
+{
+	-webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .select-dropdown
 {
-	background-color: theme.$overlay2;
+	box-sizing: border-box;
 	border-radius: theme.$border-radius;
-
-	select
-	{
-		max-width: 100%;
-		padding: 8px 24px 8px 10px;
-		border: none;
-		background-color: transparent;
-		// -webkit-appearance: none;
-		// -moz-appearance: none;
-		appearance: none;
-		color: theme.$text;
-	}
+	max-width: 100%;
+	padding: .375rem 1.5rem .375rem .5rem;
+	border: none;
+	// -webkit-appearance: none;
+	// -moz-appearance: none;
+	// appearance: none;
+	color: theme.$text;
+	background: theme.$overlay2;
+	// outline-width: 2px;
+	// outline-style: solid;
+	// outline-color: theme.$overlay1;
 }
+
+.select-dropdown:focus
+{
+	outline: 2px inset theme.$accent;
+}
+
