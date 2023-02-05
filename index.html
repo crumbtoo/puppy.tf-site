@@ -16,18 +16,30 @@
 	<body>
 		<script type="module" src="build/script.js"></script>
 
-		<div class="cfg-make-wrapper">
-			<div class="tabs">
-				<div class="tab-label" id="tab-binds">binds</div>
-				<div class="tab-label" id="tab-graphics">graphics</div>
-				<div class="tab-label" id="tab-scripts">scripts</div>
+		<div class="makecfg-tabs">
+
+			<input type="radio" name="tabs" id="tab_graphics" checked="checked">
+			<label for="tab_graphics">graphics</label>
+			<div class="tab">
+				<h1>graphics</h1>
+<!-- listen you gotta be a little crazy sometimes -->
+#include "html/makecfg/graphics.html"
 			</div>
 
-			<div class="tab-content-view">
-				<div class="tab-content" id="binds">hello</div>
-				<div class="tab-content" id="graphics">gaff</div>
-				<div class="tab-content" id="scripts">skipting</div>
+			<input type="radio" name="tabs" id="tabtwo">
+			<label for="tabtwo">Tab Two</label>
+			<div class="tab">
+				<h1>Tab Two Content</h1>
+				<p>hrrm</p>
 			</div>
+
+			<input type="radio" name="tabs" id="tabthree">
+			<label for="tabthree">Tab Three</label>
+			<div class="tab">
+				<h1>Tab Three Content</h1>
+				<p>hii</p>
+			</div>
+
 		</div>
 	</body>
 </html>

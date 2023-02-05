@@ -1,65 +1,59 @@
 @use "catppuccin";
 @use "theme";
 
-/* stealed the https://codepen.io/tutsplus/pen/VLeXqy */
-.cfg-make-wrapper
+.makecfg-tabs
 {
-	max-width: 50rem;
-	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
 	margin: 0 auto;
-	height: 14.75rem;
-	// background: theme.$mantle;
-	// padding: 0 1em;
+	max-width: 60rem;
 
 	*
 	{
 		box-sizing: border-box;
 	}
 
-
-	.tabs
+	label
 	{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		// justify-content: start;
-		justify-content: space-around;
-		column-gap: 4px;
+		order: 1; // Put the labels first
+		display: block;
+		padding: 1rem 2rem;
+		margin-right: 0.2rem;
+		cursor: pointer;
+		background: theme.$surface0;
+		font-weight: bold;
+		transition: background ease 0.2s;
+		opacity: 0.7;
 
-		.tab-label
-		{
-			flex-shrink: 3;
-			// position: relative;
-			display: block;
-			line-height: 2.75em;
-			// height: 3em;
-			padding: 0 1.618em;
-			background: theme.$surface0;
-			// margin-right: 4px;
-			font-size: 15px;
-			color: theme.$subtext1;
-			cursor: pointer;
-			// top: 0;
-			// transition: all 0.25s;
-
-			.active
-			{
-				top: -0.25rem;
-				border-bottom: 4px solid;
-			}
-		}
-		.tab-label:hover
-		{
-			top: -0.25rem;
-			// transition: top 0.25s;
-		}
+		transition: opacity 0.3s;
 	}
 
-	.tab-content-view
+	label:hover
 	{
-		.tab-content
-		{
-			display: none;
-		}
+		opacity: 1;
+	}
+
+	.tab
+	{
+		order: 99; // Put the tabs last
+		flex-grow: 1;
+		width: 100%;
+		display: none;
+		padding: 1rem;
+		background: theme.$surface0;
+	}
+
+	input[type="radio"]
+	{
+		display: none;
+	}
+	input[type="radio"]:checked + label
+	{
+		// background: theme.$surface0;
+		opacity: 1;
+	}
+	input[type="radio"]:checked + label + .tab
+	{
+		display: block;
 	}
 }
