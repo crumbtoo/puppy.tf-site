@@ -15,7 +15,7 @@ SCSS_FLAGS := --style=compressed \
 # HTML_SRC := index.html $(wildcard html/*.html html/*/*.html)
 # HTML_OUT := build/index.html
 
-all: $(SCSS_OUT) $(CSS_OUT) index.html
+all: $(SCSS_OUT) $(CSS_OUT) $(BUILD_DIR)/index.html $(BUILD_DIR)/main.js
 
 $(BUILD_DIR):
 	mkdir $(BUILD_DIR) || true
@@ -29,10 +29,12 @@ $(CSS_OUT): $(BUILD_DIR)/%.css: css/%.css
 $(HTML_OUT): $(BUILD_DIR)/%.html: $(HTML_SRC)
 	cpp -P -x c -E -traditional-cpp $< -o $@
 
-index.html: src/Main.elm
-	elm make $<
+$(BUILD_DIR)/main.js: src/Main.elm
+	elm make $< --output=$@
+
+$(BUILD_DIR)/index.html: html/index.html
+	cp $< $@
 
 .PHONY:
 clean:
 	rm -rf build/
-	rm index.html

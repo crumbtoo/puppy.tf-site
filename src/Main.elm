@@ -1,9 +1,11 @@
 module Main exposing (main)
-import Browser
+import Browser exposing (..)
 import Browser.Navigation as Nav
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import Url
+import Url.Builder as UB
 
 main : Program () Model Msg
 main = Browser.application
@@ -45,20 +47,32 @@ update msg model =
 
 view : Model -> Browser.Document Msg
 view model =
-    { title = "URL Interceptor"
+    { title = "puppy.tf"
     , body =
         [ text "The current URL is: "
         , b [] [ text (Url.toString model.url) ]
-        , ul []
-            [ viewLink "#scripts"
-            , viewLink "#binds"
-            , viewLink "#blocks"
+        , div [ class "makecfg-tabs" ]
+            [ viewTabButton "scripts"
+            , viewTabButton "binds"
+            , viewTabButton "blocks"
             ]
+        , viewTab (Maybe.withDefault "scripts" model.url.fragment)
         ]
     }
 
+viewTab : String -> Html msg
+viewTab tabid =
+    case tabid of
+        "scripts" ->
+            text "this is the scripts tab :3"
+        "binds" ->
+            text "binds go here"
+        "blocks" ->
+            text "this one will be hard.,"
+        _ ->
+            text "none lol"
 
-viewLink : String -> Html msg
-viewLink path =
-    li [] [ a [ href path ] [ text path ] ]
+viewTabButton : String -> Html msg
+viewTabButton path =
+    button [] [ a [ href ("#" ++ path) ] [ text path ] ]
 
