@@ -15,6 +15,7 @@
         border-radius: theme.$border-radius;
         background: theme.$surface0;
         width: 17rem;
+        transition: box-shadow ease 0.3s;
         @include theme.cute-shadow;
 
         .preview
@@ -28,12 +29,26 @@
         {
             padding: 0.2rem;
 
-            .name
+            .top-container
             {
-                margin: 0;
-                margin-left: 0.5rem;
-                font-weight: bold;
-                font-size: 1.1em;
+                display: flex;
+
+                .name
+                {
+                    margin: 0;
+                    margin-left: 0.5rem;
+                    margin-right: auto;
+
+                    font-weight: bold;
+                    font-size: 1.1em;
+                }
+                .addlbl
+                {
+                }
+                .addbtn
+                {
+                    margin-left: auto;
+                }
             }
 
             .desc
@@ -44,5 +59,16 @@
                 padding: theme.$small-gap;
             }
         }
+    }
+
+    .script-info:hover
+    {
+        @include theme.emph-shadow;
+    }
+
+    .active
+    {
+        color: theme.$mantle;
+        background: theme.$green;
     }
 }

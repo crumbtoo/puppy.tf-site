@@ -49,11 +49,18 @@ update msg model =
             , Cmd.none
             )
 
-        AddScript sname -> -- Debug.todo "a"
-            let addsc cfg s = { cfg | scripts = insert s cfg.scripts } in
-            ( Debug.log "model" { model | config = addsc model.config sname }
-            , Cmd.none
-            )
+        AddScript id -> -- Debug.todo "a"
+            let addsc cfg s = { cfg | scripts = insert s cfg.scripts }
+                remsc cfg s = { cfg | scripts = remove s cfg.scripts }
+            in
+            if Set.member id model.config.scripts then
+                ( Debug.log "model" { model | config = remsc model.config id }
+                , Cmd.none
+                )
+            else
+                ( Debug.log "model" { model | config = addsc model.config id }
+                , Cmd.none
+                )
 
 view : Model -> Browser.Document Msg
 view model =
@@ -70,7 +77,7 @@ view model =
             [ div [ class "end" ] [ text "crumbtoo/puppy.tf" ]
             ]
         , div [ class "beside-bar" ]
-            [ viewTab frag
+            [ viewTab frag model
             ]
         ]
     }
@@ -89,11 +96,11 @@ viewTabButton ctab tabid =
     [ a [ href ("#" ++ tabid) ] [ text tabid ]
     ]
 
-viewTab : String -> Html Msg
-viewTab tabid =
+viewTab : String -> Model -> Html Msg
+viewTab tabid model =
     case tabid of
         "scripts" ->
-            TabScripts.tabHTML
+            TabScripts.tabHTML model.config.scripts
         "binds" ->
             text "binds go here"
         "blocks" ->
