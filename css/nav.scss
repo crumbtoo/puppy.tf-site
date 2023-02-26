@@ -5,13 +5,15 @@ $sidebar-width: 150px;
 
 .sidebar
 {
+	display: flex;
+	flex-direction: column;
 	background: theme.$crust;
 	width: $sidebar-width;
 	height: 100%;
 	position: absolute;
 	right: 0;
 	top: 0;
-	padding-top: 40px;
+	// padding-top: 40px;
 
 	.tab-button
 	{
@@ -24,8 +26,9 @@ $sidebar-width: 150px;
 		// opacity: 0.0;
 
 		transition: background ease 0.3s;
-		flex-grow: 1;
+		// flex-grow: 1;
 		max-width: 10rem;
+		max-height: 3rem;
 
 		a, a:link, a:visited, a:hover, a:active
 		{
@@ -42,6 +45,13 @@ $sidebar-width: 150px;
 	{
 		// opacity: 1.0;
 		background: theme.$mantle;
+	}
+
+	.end
+	{
+		margin-top: auto;
+		text-align: center;
+		font-size: 0.8em;
 	}
 }
 

@@ -56,6 +56,8 @@ view model =
             , "blocks"
             , "hud"
             , "preview"
+            ] ++
+            [ div [ class "end" ] [ text "crumbtoo/puppy.tf" ]
             ]
         , div [ class "beside-bar" ]
             [ viewTab frag
