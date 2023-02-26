@@ -5205,6 +5205,15 @@ var $author$project$Main$update = F2(
 			model,
 			{tabno: tabno});
 	});
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
@@ -5244,51 +5253,32 @@ var $author$project$Main$viewTab = function (tabno) {
 					]));
 	}
 };
-var $author$project$Main$TabChange = function (a) {
-	return {$: 'TabChange', a: a};
-};
-var $elm$html$Html$button = _VirtualDom_node('button');
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $elm$html$Html$Events$onClick = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
+var $elm$json$Json$Encode$bool = _Json_wrap;
+var $elm$html$Html$Attributes$boolProperty = F2(
+	function (key, bool) {
 		return A2(
 			_VirtualDom_property,
 			key,
-			$elm$json$Json$Encode$string(string));
+			$elm$json$Json$Encode$bool(bool));
 	});
+var $elm$html$Html$Attributes$checked = $elm$html$Html$Attributes$boolProperty('checked');
+var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$html$Html$Attributes$name = $elm$html$Html$Attributes$stringProperty('name');
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$Main$viewTabButton = function (newtabno) {
 	return A2(
-		$elm$html$Html$button,
+		$elm$html$Html$input,
 		_List_fromArray(
 			[
-				$elm$html$Html$Events$onClick(
-				$author$project$Main$TabChange(newtabno)),
+				$elm$html$Html$Attributes$type_('radio'),
+				$elm$html$Html$Attributes$name('tabs'),
 				$elm$html$Html$Attributes$value(
-				$elm$core$String$fromInt(newtabno))
+				$elm$core$String$fromInt(newtabno)),
+				$elm$html$Html$Attributes$checked(
+				(!newtabno) ? true : false)
 			]),
-		_List_fromArray(
-			[
-				$elm$html$Html$text(
-				$elm$core$String$fromInt(newtabno))
-			]));
+		_List_Nil);
 };
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -5296,11 +5286,20 @@ var $author$project$Main$view = function (model) {
 		_List_Nil,
 		_List_fromArray(
 			[
-				$author$project$Main$viewTabButton(0),
-				$author$project$Main$viewTabButton(1),
-				$author$project$Main$viewTabButton(2),
-				$author$project$Main$viewTabButton(3),
-				$author$project$Main$viewTab(model.tabno)
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('makecfg-tabs')
+					]),
+				_List_fromArray(
+					[
+						$author$project$Main$viewTabButton(0),
+						$author$project$Main$viewTabButton(1),
+						$author$project$Main$viewTabButton(2),
+						$author$project$Main$viewTabButton(3),
+						$author$project$Main$viewTab(model.tabno)
+					]))
 			]));
 };
 var $author$project$Main$main = $elm$browser$Browser$sandbox(

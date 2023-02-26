@@ -28,20 +28,25 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-    [ viewTabButton 0
-    , viewTabButton 1
-    , viewTabButton 2
-    , viewTabButton 3
-    , viewTab model.tabno
+    [ div [ class "makecfg-tabs" ]
+      [ viewTabButton 0
+      , viewTabButton 1
+      , viewTabButton 2
+      , viewTabButton 3
+      , viewTab model.tabno
+      ]
     ]
-
-viewInput : String -> String -> String -> (String -> msg) -> Html msg
-viewInput t p v toMsg =
-    input [ type_ t, placeholder p, value v, onInput toMsg ] []
 
 viewTabButton : Int -> Html Msg
 viewTabButton newtabno =
-    button [ onClick (TabChange newtabno), value (String.fromInt newtabno) ] [ text (String.fromInt newtabno) ]
+    input
+    [ type_ "radio"
+    , name "tabs"
+    , value (String.fromInt newtabno)
+    , onClick ()
+    , checked (if newtabno == 0 then True else False)
+    ]
+    []
 
 viewTab : Int -> Html msg
 viewTab tabno =
