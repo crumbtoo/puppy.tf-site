@@ -12,6 +12,8 @@ SCSS_FLAGS := --style=compressed \
 			  --no-error-css \
 			  --stop-on-error
 
+ELM_SRC := $(wildcard src/*.elm)
+
 # HTML_SRC := index.html $(wildcard html/*.html html/*/*.html)
 # HTML_OUT := build/index.html
 
@@ -29,8 +31,8 @@ $(CSS_OUT): $(BUILD_DIR)/%.css: css/%.css
 $(HTML_OUT): $(BUILD_DIR)/%.html: $(HTML_SRC)
 	cpp -P -x c -E -traditional-cpp $< -o $@
 
-$(BUILD_DIR)/main.js: src/Main.elm
-	elm make $< --output=$@
+$(BUILD_DIR)/main.js: $(ELM_SRC)
+	elm make src/Main.elm --output=$@
 
 $(BUILD_DIR)/index.html: html/index.html
 	cp $< $@

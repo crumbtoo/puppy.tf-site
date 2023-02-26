@@ -13,7 +13,8 @@ $sidebar-width: 150px;
 	position: absolute;
 	right: 0;
 	top: 0;
-	// padding-top: 40px;
+	padding-top: 40px;
+	@include theme.cute-shadow;
 
 	.tab-button
 	{
@@ -41,6 +42,7 @@ $sidebar-width: 150px;
 		}
 
 	}
+
 	.active
 	{
 		// opacity: 1.0;

@@ -1,4 +1,5 @@
 module Main exposing (main)
+
 import Browser exposing (..)
 import Browser.Navigation as Nav
 import Html exposing (..)
@@ -6,6 +7,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Url
 import Url.Builder as UB
+
+import TabScripts as TabScripts
 
 main : Program () Model Msg
 main = Browser.application
@@ -83,7 +86,7 @@ viewTab : String -> Html msg
 viewTab tabid =
     case tabid of
         "scripts" ->
-            text "this is the scripts tab :3"
+            TabScripts.tabHTML
         "binds" ->
             text "binds go here"
         "blocks" ->

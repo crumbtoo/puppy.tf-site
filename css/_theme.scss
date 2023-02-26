@@ -61,3 +61,9 @@ $mantle:    frappe.$mantle;
 $crust:     frappe.$crust;
 
 $accent:	$mauve;
+
+@mixin cute-shadow
+{
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+

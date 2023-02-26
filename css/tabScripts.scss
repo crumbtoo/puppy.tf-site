@@ -1,0 +1,48 @@
+@use "theme";
+
+.scripts-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: flex-start;
+
+    padding: 1rem;
+    gap: 12px;
+
+    .script-info
+    {
+        border-radius: theme.$border-radius;
+        background: theme.$surface0;
+        width: 17rem;
+        @include theme.cute-shadow;
+
+        .preview
+        {
+            background: theme.$crust;
+            aspect-ratio: 16 / 9;
+            width: 100%;
+        }
+
+        .info
+        {
+            padding: 0.2rem;
+
+            .name
+            {
+                margin: 0;
+                margin-left: 0.5rem;
+                font-weight: bold;
+                font-size: 1.1em;
+            }
+
+            .desc
+            {
+                line-height: 1.618em;
+                margin: 0;
+                font-size: 0.9em;
+                padding: theme.$small-gap;
+            }
+        }
+    }
+}
