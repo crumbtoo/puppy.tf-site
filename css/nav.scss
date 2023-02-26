@@ -37,14 +37,14 @@
 
 			border-radius: 8px;
 
-			a
+			a, a:link, a:visited, a:hover, a:active
 			{
 				display: block;
+				color: theme.$subtext1;
 				line-height: 3rem;
 				width: 100%;
+				text-decoration: none;
 			}
-
-			a:visited {}
 		}
 	}
 
