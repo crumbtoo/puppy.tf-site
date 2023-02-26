@@ -35,7 +35,7 @@ update msg model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Nav.pushUrl model.key (Url.toString url) )
+                    ( model, Nav.pushUrl model.key (Url.toString <| Debug.log "a" url))
 
                 Browser.External href ->
                     ( model, Nav.load href )
@@ -51,12 +51,16 @@ view model =
     , body =
         [ text "The current URL is: "
         , b [] [ text (Url.toString model.url) ]
-        , div [ class "makecfg-tabs" ]
-            [ viewTabButton "scripts"
-            , viewTabButton "binds"
-            , viewTabButton "blocks"
+        , div [ class "makecfg-container" ]
+            [ div [ class "tabs" ]
+                [ viewTabButton "scripts"
+                , viewTabButton "binds"
+                , viewTabButton "blocks"
+                ]
+            , div [ class "tab-content" ]
+                [ viewTab (Maybe.withDefault "scripts" model.url.fragment)
+                ]
             ]
-        , viewTab (Maybe.withDefault "scripts" model.url.fragment)
         ]
     }
 
@@ -74,5 +78,5 @@ viewTab tabid =
 
 viewTabButton : String -> Html msg
 viewTabButton path =
-    button [] [ a [ href ("#" ++ path) ] [ text path ] ]
+    div [ class "tab-button" ] [ a [ href ("#" ++ path) ] [ text path ] ]
 

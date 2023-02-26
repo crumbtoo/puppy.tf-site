@@ -1,48 +1,60 @@
-@use "catppuccin";
 @use "theme";
 @use "makecfg_panels";
 
-.makecfg-tabs
+.makecfg-container
 {
-	display: flex;
-	flex-wrap: wrap;
+	background: theme.$crust;
 	margin: 0 auto;
 	max-width: 60rem;
-	column-gap: theme.$small-gap;
+	padding: theme.$small-gap;
 
 	*
 	{
-		// box-sizing: border-box;
+		box-sizing: border-box;
 	}
 
-	.tab-label
+	.tabs
 	{
-		order: 1; // Put the labels first
-		display: block;
-		padding: 1.2rem 0;
-		margin: theme.$small-gap 0;
-		text-align: center;
-		cursor: pointer;
-		background: theme.$surface0;
-		font-weight: bold;
-		transition: background ease 0.2s;
-		opacity: 0.6;
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: theme.$small-gap;
+		width: 100%;
 
-		transition: opacity 0.3s;
-		flex-grow: 1;
-		max-width: 10rem;
+		.tab-button
+		{
+			display: block;
+			// padding: 1.2rem 0;
+			text-align: center;
+			cursor: pointer;
+			background: theme.$overlay0;
+			font-weight: bold;
+			transition: background ease 0.2s;
+			opacity: 0.6;
 
-		border-radius: 8px;
+			transition: opacity 0.3s;
+			flex-grow: 1;
+			max-width: 10rem;
+
+			border-radius: 8px;
+
+			a
+			{
+				display: block;
+				line-height: 3rem;
+				width: 100%;
+			}
+
+			a:visited {}
+		}
 	}
 
-	label:hover
-	{
-		opacity: 1;
-	}
+	// .tab-button:hover
+	// {
+	// 	opacity: 1;
+	// }
 
-	.tab
+	.tab-content
 	{
-		order: 99; // Put the tabs last
 		flex-grow: 1;
 		width: 100%;
 		display: none;
@@ -51,19 +63,6 @@
 		border-radius: theme.$border-radius;
 
 		@include makecfg_panels.panels;
-	}
-
-	input[type="radio"]
-	{
-		display: none;
-	}
-	input[type="radio"]:checked + label
-	{
-		opacity: 1;
-	}
-	input[type="radio"]:checked + label + .tab
-	{
-		display: block;
 	}
 
 	.credit
