@@ -47,22 +47,33 @@ update msg model =
 
 view : Model -> Browser.Document Msg
 view model =
+    let frag = Maybe.withDefault"" model.url.fragment in
     { title = "puppy.tf"
     , body =
         [ text "The current URL is: "
         , b [] [ text (Url.toString model.url) ]
         , div [ class "makecfg-container" ]
-            [ div [ class "tabs" ]
-                [ viewTabButton "scripts"
-                , viewTabButton "binds"
-                , viewTabButton "blocks"
-                ]
+            [ div [ class "tabs" ] <| viewTabButtons frag ["scripts", "binds", "blocks"]
             , div [ class "tab-content" ]
                 [ viewTab (Maybe.withDefault "scripts" model.url.fragment)
                 ]
             ]
         ]
     }
+
+viewTabButtons : String -> List String -> List (Html msg)
+viewTabButtons ctab = List.map <| viewTabButton ctab
+
+viewTabButton : String -> String -> Html msg
+viewTabButton ctab tabid =
+    div
+    [ classList
+        [ ("tab-button", True)
+        , ("active", ctab == tabid) -- OPTIMISATION: i kinda wanna go back to tabs having integer IDs
+        ]
+    ]
+    [ a [ href ("#" ++ tabid) ] [ text tabid ]
+    ]
 
 viewTab : String -> Html msg
 viewTab tabid =
@@ -76,7 +87,4 @@ viewTab tabid =
         _ ->
             text "none lol"
 
-viewTabButton : String -> Html msg
-viewTabButton path =
-    div [ class "tab-button" ] [ a [ href ("#" ++ path) ] [ text path ] ]
 
