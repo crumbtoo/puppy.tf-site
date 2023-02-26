@@ -53,7 +53,7 @@ view model =
         [ text "The current URL is: "
         , b [] [ text (Url.toString model.url) ]
         , div [ class "makecfg-container" ]
-            [ div [ class "tabs" ] <| viewTabButtons frag ["scripts", "binds", "blocks"]
+            [ div [ class "tabs-buttons" ] <| viewTabButtons frag ["scripts", "binds", "blocks"]
             , div [ class "tab-content" ]
                 [ viewTab (Maybe.withDefault "scripts" model.url.fragment)
                 ]

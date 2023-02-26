@@ -6,14 +6,16 @@
 	background: theme.$crust;
 	margin: 0 auto;
 	max-width: 60rem;
-	padding: theme.$small-gap;
+	padding: theme.$useless-gap;
+	display: grid;
+	grid-gap: theme.$useless-gap;
 
 	*
 	{
 		box-sizing: border-box;
 	}
 
-	.tabs
+	.tabs-buttons
 	{
 		display: flex;
 		flex-wrap: wrap;
@@ -62,7 +64,6 @@
 	{
 		flex-grow: 1;
 		width: 100%;
-		display: none;
 		padding: 1rem;
 		background: theme.$surface0;
 		border-radius: theme.$border-radius;
