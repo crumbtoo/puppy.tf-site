@@ -1,5 +1,11 @@
 module Tf2 exposing (..)
 
+import Set exposing (..)
+
+type alias Config =
+    { scripts : Set String
+    }
+
 type Class = Scout
            | Soldier
            | Pyro
@@ -28,12 +34,4 @@ classToInt c =
         Medic        -> 7
         Sniper       -> 8
         Spy          -> 9
-
-
-
-
-
-
-
-
 

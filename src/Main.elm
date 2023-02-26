@@ -7,8 +7,17 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Url
 import Url.Builder as UB
+import Set exposing (..)
+import Common exposing (..)
 
 import TabScripts as TabScripts
+import Tf2 exposing (Config)
+
+type alias Model =
+    { key : Nav.Key
+    , url : Url.Url
+    , config : Tf2.Config
+    }
 
 main : Program () Model Msg
 main = Browser.application
@@ -20,17 +29,9 @@ main = Browser.application
        , onUrlRequest = LinkClicked
        }
 
-type alias Model =
-    { key : Nav.Key
-    , url : Url.Url
-    }
-
-type Msg = LinkClicked Browser.UrlRequest
-         | UrlChanged Url.Url
-
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key = (Model key url, Cmd.none)
+init flags url key = (Model key url <| Tf2.Config empty, Cmd.none)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -45,6 +46,12 @@ update msg model =
 
         UrlChanged url ->
             ( { model | url = url }
+            , Cmd.none
+            )
+
+        AddScript sname -> -- Debug.todo "a"
+            let addsc cfg s = { cfg | scripts = insert s cfg.scripts } in
+            ( Debug.log "model" { model | config = addsc model.config sname }
             , Cmd.none
             )
 
@@ -82,7 +89,7 @@ viewTabButton ctab tabid =
     [ a [ href ("#" ++ tabid) ] [ text tabid ]
     ]
 
-viewTab : String -> Html msg
+viewTab : String -> Html Msg
 viewTab tabid =
     case tabid of
         "scripts" ->
