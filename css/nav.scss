@@ -1,6 +1,55 @@
 @use "theme";
 @use "makecfg_panels";
 
+$sidebar-width: 150px;
+
+.sidebar
+{
+	background: theme.$crust;
+	width: $sidebar-width;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding-top: 40px;
+
+	.tab-button
+	{
+		display: block;
+		// padding: 1.2rem 0;
+		text-align: right;
+		cursor: pointer;
+		// background: theme.$mantle;
+		font-weight: bold;
+		// opacity: 0.0;
+
+		transition: background ease 0.3s;
+		flex-grow: 1;
+		max-width: 10rem;
+
+		a, a:link, a:visited, a:hover, a:active
+		{
+			display: block;
+			color: theme.$subtext1;
+			line-height: 3rem;
+			width: 100%;
+			text-decoration: none;
+			padding: 0 1rem;
+		}
+
+	}
+	.active
+	{
+		// opacity: 1.0;
+		background: theme.$mantle;
+	}
+}
+
+.beside-bar
+{
+	margin-right: $sidebar-width;
+}
+
 .makecfg-container
 {
 	background: theme.$crust;
@@ -22,37 +71,6 @@
 		column-gap: theme.$small-gap;
 		width: 100%;
 
-		.tab-button
-		{
-			display: block;
-			// padding: 1.2rem 0;
-			text-align: center;
-			cursor: pointer;
-			background: theme.$overlay0;
-			font-weight: bold;
-			transition: background ease 0.2s;
-			opacity: 0.6;
-
-			transition: opacity 0.3s;
-			flex-grow: 1;
-			max-width: 10rem;
-
-			border-radius: 8px;
-
-			a, a:link, a:visited, a:hover, a:active
-			{
-				display: block;
-				color: theme.$subtext1;
-				line-height: 3rem;
-				width: 100%;
-				text-decoration: none;
-			}
-
-		}
-		.active
-		{
-			opacity: 1.0;
-		}
 	}
 
 	// .tab-button:hover

@@ -47,16 +47,18 @@ update msg model =
 
 view : Model -> Browser.Document Msg
 view model =
-    let frag = Maybe.withDefault"" model.url.fragment in
+    let frag = Maybe.withDefault "" model.url.fragment in
     { title = "puppy.tf"
     , body =
-        [ text "The current URL is: "
-        , b [] [ text (Url.toString model.url) ]
-        , div [ class "makecfg-container" ]
-            [ div [ class "tabs-buttons" ] <| viewTabButtons frag ["scripts", "binds", "blocks"]
-            , div [ class "tab-content" ]
-                [ viewTab (Maybe.withDefault "scripts" model.url.fragment)
-                ]
+        [ div [ class "sidebar" ] <| viewTabButtons frag
+            [ "scripts"
+            , "binds"
+            , "blocks"
+            , "hud"
+            , "preview"
+            ]
+        , div [ class "beside-bar" ]
+            [ viewTab frag
             ]
         ]
     }
