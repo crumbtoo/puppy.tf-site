@@ -49,7 +49,7 @@ update msg model =
             , Cmd.none
             )
 
-        AddScript name -> -- Debug.todo "a"
+        ToggleScript name -> -- Debug.todo "a"
             let addsc cfg s = { cfg | scripts = insert s cfg.scripts }
                 remsc cfg s = { cfg | scripts = remove s cfg.scripts }
             in

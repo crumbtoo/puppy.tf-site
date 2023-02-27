@@ -50,7 +50,7 @@ viewScriptInfo scriptset sc =
             [ ("script-info", True)
             , ("active", Set.member sc.name scriptset)
             ] 
-        , onClick <| AddScript sc.name
+        , onClick <| ToggleScript sc.name
         ]
     [ div [ class "preview" ]
         []
