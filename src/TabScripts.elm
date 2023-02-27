@@ -16,32 +16,39 @@ type alias ScriptInfo msg =
     , desc : String
     , name : String -- internal name
     , classes : List Tf2.Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
-    , options : Html msg
+    , options : Maybe (Html msg)
     }
 
-scripts : List (ScriptInfo msg)
+scripts : List (ScriptInfo Msg)
 scripts =
-    let odiv = div [ class "script-options" ] in
+    let opt html = Just <| div [ class "script-options" ] html in
     [ ScriptInfo "Automatic Crouch Jump"
                  "automatically crouch whenever you jump"
                  "crouch-jump"
                  allClasses
-                 <| odiv []
+                 Nothing
     , ScriptInfo "Übercharge Alert"
                  "send a message notifying your team whenever you use Übercharge"
                  "uber-alert"
                  [Medic]
-                 <| odiv [ input [ type_ "text" ] [] ]
+                 <| opt
+                     [ input
+                         [ type_ "text"
+                         , placeholder "alert message"
+                         , onInput <| ScriptOption "uber-alert:message"
+                         ]
+                         []
+                     ]
     , ScriptInfo "No-Drop"
                  "switch to your Medi-gun and drop the intelligence when you attempt to use Über"
                  "no-drop"
                  [Medic]
-                 <| odiv []
+                 Nothing
     , ScriptInfo "Quick Teleport"
                  "blah"
                  "quick-teleport"
                  [Engineer]
-                 <| odiv []
+                 Nothing
     ]
 
 tabHTML : Set String -> Html Msg
@@ -49,13 +56,13 @@ tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set)
 
 viewScriptInfo : Set String -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =
-    let isEnabled = Set.member sc.name scriptset in
+    let isEnabled = Set.member sc.name scriptset
+    in
     div
         [ classList
             [ ("script-info", True)
             , ("active", isEnabled)
             ] 
-        -- , onClick <| ToggleScript sc.name
         ]
     [ div [ class "preview" ]
         []
@@ -65,7 +72,17 @@ viewScriptInfo scriptset sc =
             , button [ class "addbtn", onClick <| ToggleScript sc.name] [ text "add" ]
             ]
         , p [ class "desc" ] [ text sc.desc ]
-        , sc.options
+        -- , sc.options
+        , if isEnabled then viewOptions sc.options else div [] []
         ]
     ]
+
+viewOptions : Maybe (Html msg) -> Html msg
+viewOptions opts =
+    case opts of
+        Nothing ->
+            div [] []
+        Just o ->
+            div [ class "script-options-container" ]
+                <| [ o ]
 

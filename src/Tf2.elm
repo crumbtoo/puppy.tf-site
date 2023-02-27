@@ -1,9 +1,11 @@
 module Tf2 exposing (..)
 
 import Set exposing (..)
+import Dict exposing (..)
 
 type alias Config =
     { scripts : Set String
+    , scriptOpts : Dict String String
     }
 
 type Class = Scout

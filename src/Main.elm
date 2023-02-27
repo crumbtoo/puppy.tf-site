@@ -9,6 +9,7 @@ import Url
 import Url.Builder as UB
 import Set exposing (..)
 import Common exposing (..)
+import Dict as D
 
 import TabScripts as TabScripts
 import Tf2 exposing (Config)
@@ -31,7 +32,8 @@ main = Browser.application
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key = (Model key url <| Tf2.Config empty, Cmd.none)
+init flags url key = (Model key url <| Tf2.Config empty
+    D.empty, Cmd.none)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
@@ -61,6 +63,14 @@ update msg model =
                 ( Debug.log "model" { model | config = addsc model.config name }
                 , Cmd.none
                 )
+        ScriptOption key value ->
+            let addso cfg k v = { cfg | scriptOpts =
+                    D.insert k v cfg.scriptOpts }
+            in
+            ( Debug.log "scriptopt" { model | config = addso
+                model.config key value }
+            , Cmd.none
+            )
 
 view : Model -> Browser.Document Msg
 view model =

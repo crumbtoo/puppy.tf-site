@@ -7,3 +7,4 @@ import Url
 type Msg = LinkClicked Browser.UrlRequest
          | UrlChanged Url.Url
          | ToggleScript String
+         | ScriptOption String String
