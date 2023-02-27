@@ -71,6 +71,8 @@ view model =
             [ "scripts"
             , "binds"
             , "blocks"
+            , "crosshair"
+            , "hitsound"
             , "hud"
             , "preview"
             ] ++

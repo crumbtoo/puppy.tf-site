@@ -42,21 +42,24 @@
                     font-weight: bold;
                     font-size: 1.1em;
                 }
-                .addlbl
-                {
-                }
                 .addbtn
                 {
                     margin-left: auto;
+                    height: theme.$line-height;
                 }
             }
 
             .desc
             {
-                line-height: 1.618em;
+                line-height: theme.$line-height;
                 margin: 0;
                 font-size: 0.9em;
                 padding: theme.$small-gap;
+            }
+
+            .script-options
+            {
+
             }
         }
     }

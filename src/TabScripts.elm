@@ -31,7 +31,7 @@ scripts =
                  "send a message notifying your team whenever you use Übercharge"
                  "uber-alert"
                  [Medic]
-                 <| odiv []
+                 <| odiv [ input [ type_ "text" ] [] ]
     , ScriptInfo "No-Drop"
                  "switch to your Medi-gun and drop the intelligence when you attempt to use Über"
                  "no-drop"
@@ -49,20 +49,20 @@ tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set)
 
 viewScriptInfo : Set String -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =
-    -- let idstr = String.fromInt <| sc.id in
+    let isEnabled = Set.member sc.name scriptset in
     div
         [ classList
             [ ("script-info", True)
-            , ("active", Set.member sc.name scriptset)
+            , ("active", isEnabled)
             ] 
-        , onClick <| ToggleScript sc.name
+        -- , onClick <| ToggleScript sc.name
         ]
     [ div [ class "preview" ]
         []
-    , div
-        [ class "info" ]
+    , div [ class "info" ]
         [ div [ class "top-container" ]
             [ p [ class "name" ] [ text sc.prettyName ]
+            , button [ class "addbtn", onClick <| ToggleScript sc.name] [ text "add" ]
             ]
         , p [ class "desc" ] [ text sc.desc ]
         , sc.options
