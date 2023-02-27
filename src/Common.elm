@@ -6,4 +6,4 @@ import Url
 
 type Msg = LinkClicked Browser.UrlRequest
          | UrlChanged Url.Url
-         | AddScript Int
+         | AddScript String

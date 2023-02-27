@@ -3,7 +3,7 @@ module Tf2 exposing (..)
 import Set exposing (..)
 
 type alias Config =
-    { scripts : Set Int
+    { scripts : Set String
     }
 
 type Class = Scout

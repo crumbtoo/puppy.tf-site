@@ -39,7 +39,7 @@ update msg model =
         LinkClicked urlRequest ->
             case urlRequest of
                 Browser.Internal url ->
-                    ( model, Nav.pushUrl model.key (Url.toString <| Debug.log "a" url))
+                    ( model, Nav.pushUrl model.key <| Url.toString url)
 
                 Browser.External href ->
                     ( model, Nav.load href )
@@ -49,16 +49,16 @@ update msg model =
             , Cmd.none
             )
 
-        AddScript id -> -- Debug.todo "a"
+        AddScript name -> -- Debug.todo "a"
             let addsc cfg s = { cfg | scripts = insert s cfg.scripts }
                 remsc cfg s = { cfg | scripts = remove s cfg.scripts }
             in
-            if Set.member id model.config.scripts then
-                ( Debug.log "model" { model | config = remsc model.config id }
+            if Set.member name model.config.scripts then
+                ( Debug.log "model" { model | config = remsc model.config name }
                 , Cmd.none
                 )
             else
-                ( Debug.log "model" { model | config = addsc model.config id }
+                ( Debug.log "model" { model | config = addsc model.config name }
                 , Cmd.none
                 )
 
@@ -90,7 +90,8 @@ viewTabButton ctab tabid =
     div
     [ classList
         [ ("tab-button", True)
-        , ("active", ctab == tabid) -- OPTIMISATION: i kinda wanna go back to tabs having integer IDs
+        -- OPTIMISATION: i kinda wanna go back to tabs having integer IDs
+        , ("active", ctab == tabid)
         ]
     ]
     [ a [ href ("#" ++ tabid) ] [ text tabid ]
