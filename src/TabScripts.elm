@@ -75,11 +75,3 @@ viewScriptInfo scriptset sc =
         ]
     ]
 
-viewOptions : Maybe (Html msg) -> Html msg
-viewOptions opts =
-    case opts of
-        Nothing ->
-            div [] []
-        Just o ->
-            div [ class "script-options-container" ] [ o ]
-
