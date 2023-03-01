@@ -1,9 +1,12 @@
 module TabScripts exposing
     ( ScriptInfo
-    , scripts
+    , allScripts
     , tabHTML
+    , genScript
+    , genBinds
     )
 
+import Dict exposing (..)
 import Tf2 exposing (..)
 import Set exposing (..)
 import Html exposing (..)
@@ -19,8 +22,8 @@ type alias ScriptInfo msg =
     , options : Html msg
     }
 
-scripts : List (ScriptInfo Msg)
-scripts =
+allScripts : List (ScriptInfo Msg)
+allScripts =
     let opt html = div [ class "script-options" ] html in
     [ ScriptInfo "Automatic Crouch Jump"
                  "automatically crouch whenever you jump"
@@ -48,11 +51,25 @@ scripts =
                  "blah"
                  "quick-teleport"
                  [Engineer]
-                 <| opt []
+                 <| opt
+                     [ input
+                         [ type_ "text"
+                         , placeholder "teleport key"
+                         , onInput <| ScriptOption "quick-teleport:tpkey"
+                         ]
+                         []
+                     , input
+                         [ type_ "text"
+                         , placeholder "modifier"
+                         , onInput <| ScriptOption "quick-teleport:modifier"
+                         ]
+                         []
+                     ]
+                         
     ]
 
 tabHTML : Set String -> Html Msg
-tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set) scripts
+tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set) allScripts
 
 viewScriptInfo : Set String -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =
@@ -75,3 +92,25 @@ viewScriptInfo scriptset sc =
         ]
     ]
 
+-- elm is so frusterating. this would be 100x safer with
+-- typeclasses
+genScript : Dict String String -> String -> String
+genScript opts scriptID =
+    let mkalias n v = "alias \"" ++ n ++ "\" \"" ++ v ++ "\"\n"
+        getopt opt = Maybe.withDefault opt <| Dict.get opt opts
+        mklines = List.foldr (++) ""
+    in
+    case scriptID of
+        "crouch-jump" -> mklines
+            [ mkalias "+crouch_jump"  "+jump; +duck"
+            , mkalias "-crouch_jump"  "-jump; -duck"
+            ]
+
+        "uber-alert" ->
+            mkalias "uber_alert" ("say_team " ++ getopt "uber-alert:message")
+        "no-drop" -> "nodop"
+        "quick-teleport" -> "quikktp"
+        _ -> Debug.todo "sorry bitch! elm has no fucking typeclasses!"
+        
+genBinds : Set String -> Dict String String -> String
+genBinds scripts opts = ""

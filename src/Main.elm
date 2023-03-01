@@ -111,6 +111,30 @@ viewTabButton ctab tabid =
 
 viewTab : String -> Model -> Html Msg
 viewTab tabid model =
+    let viewScripts =
+            div [] <| List.map (\x ->
+                p
+                [ style "background-color" "black"
+                , style "white-space" "pre-line"
+                ]
+                [ b [] [text x]
+                , p [] [text <| TabScripts.genScript model.config.scriptOpts x]
+                ]
+            ) <| Set.toList model.config.scripts
+
+        viewBinds =
+            div []
+            [ p
+                [ style "background-color" "black"
+                , style "white-space" "pre-line"
+                ]
+                [ b [] [text "binds"]
+                , p [] [text <| TabScripts.genBinds
+                    model.config.scripts
+                    model.config.scriptOpts]
+                ]
+            ]
+    in
     case tabid of
         "scripts" ->
             TabScripts.tabHTML model.config.scripts
@@ -118,6 +142,12 @@ viewTab tabid model =
             text "binds go here"
         "blocks" ->
             text "this one will be hard.,"
+        "preview" ->
+            div []
+            [ viewScripts
+            , viewBinds
+            ]
+
         _ ->
             text "none lol"
 
