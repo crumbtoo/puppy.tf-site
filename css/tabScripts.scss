@@ -56,12 +56,14 @@
                 line-height: theme.$line-height;
                 margin: 0;
                 font-size: 0.9em;
+                color: theme.$subtext0;
                 padding: theme.$small-gap;
             }
 
             .script-options
             {
                 text-align: left;
+                display: none;
             }
         }
     }
@@ -75,5 +77,15 @@
     {
         color: theme.$mantle;
         background: theme.$green;
+
+        .desc
+        {
+            color: theme.$crust;
+        }
+
+        .script-options
+        {
+            display: block;
+        }
     }
 }

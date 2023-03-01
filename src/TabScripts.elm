@@ -16,17 +16,17 @@ type alias ScriptInfo msg =
     , desc : String
     , name : String -- internal name
     , classes : List Tf2.Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
-    , options : Maybe (Html msg)
+    , options : Html msg
     }
 
 scripts : List (ScriptInfo Msg)
 scripts =
-    let opt html = Just <| div [ class "script-options" ] html in
+    let opt html = div [ class "script-options" ] html in
     [ ScriptInfo "Automatic Crouch Jump"
                  "automatically crouch whenever you jump"
                  "crouch-jump"
                  allClasses
-                 Nothing
+                 <| opt []
     , ScriptInfo "Übercharge Alert"
                  "send a message notifying your team whenever you use Übercharge"
                  "uber-alert"
@@ -43,12 +43,12 @@ scripts =
                  "switch to your Medi-gun and drop the intelligence when you attempt to use Über"
                  "no-drop"
                  [Medic]
-                 Nothing
+                 <| opt []
     , ScriptInfo "Quick Teleport"
                  "blah"
                  "quick-teleport"
                  [Engineer]
-                 Nothing
+                 <| opt []
     ]
 
 tabHTML : Set String -> Html Msg
@@ -56,8 +56,7 @@ tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set)
 
 viewScriptInfo : Set String -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =
-    let isEnabled = Set.member sc.name scriptset
-    in
+    let isEnabled = Set.member sc.name scriptset in
     div
         [ classList
             [ ("script-info", True)
@@ -72,8 +71,7 @@ viewScriptInfo scriptset sc =
             , button [ class "addbtn", onClick <| ToggleScript sc.name] [ text "add" ]
             ]
         , p [ class "desc" ] [ text sc.desc ]
-        -- , sc.options
-        , if isEnabled then viewOptions sc.options else div [] []
+        , sc.options
         ]
     ]
 
