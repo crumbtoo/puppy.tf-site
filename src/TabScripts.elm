@@ -19,6 +19,7 @@ type alias ScriptInfo msg =
     , desc : String
     , name : String -- internal name
     , classes : List Tf2.Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
+    -- , binds : Set String -- list of aliases needing binds
     , options : Html msg
     }
 
