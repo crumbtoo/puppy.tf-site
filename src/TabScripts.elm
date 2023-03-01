@@ -81,6 +81,5 @@ viewOptions opts =
         Nothing ->
             div [] []
         Just o ->
-            div [ class "script-options-container" ]
-                <| [ o ]
+            div [ class "script-options-container" ] [ o ]
 
