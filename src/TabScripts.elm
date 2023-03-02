@@ -13,9 +13,9 @@ import Html.Events exposing (..)
 import Common exposing (..)
 import Scripts exposing (scripts)
 
-tabHTML : AnySet String (ScriptInfo Msg) -> Html Msg
-tabHTML scripts = div [ class "scripts-container" ]
-    <| List.map (viewScriptInfo scripts) Scripts.scripts
+tabHTML : AnySet String (ScriptInfo Msg) -> Dict String String -> Html Msg
+tabHTML scripts opts = div [ class "scripts-container" ]
+    <| List.map (viewScriptInfo scripts) (Scripts.scripts opts)
 
 viewScriptInfo : AnySet String (ScriptInfo Msg) -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =

@@ -124,15 +124,6 @@ viewTab tabid model =
                 ]
             )
             |> div []
-            -- div [] <| List.map (\sc ->
-            --     p
-            --     [ style "background-color" "black"
-            --     , style "white-space" "pre-line"
-            --     ]
-            --     [ b [] [text sc.name]
-            --     , p [] [text <| sc.genScript model.config.scriptOpts]
-            --     ]
-            -- ) <| SA.toList model.config.scripts
 
         viewBinds =
             div []
@@ -149,7 +140,7 @@ viewTab tabid model =
     in
     case tabid of
         "scripts" ->
-            TabScripts.tabHTML model.config.scripts
+            TabScripts.tabHTML model.config.scripts model.config.scriptOpts
         "binds" ->
             text "binds go here"
         "blocks" ->
