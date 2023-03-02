@@ -8,16 +8,16 @@ import Html.Events exposing (..)
 import Url
 import Url.Builder as UB
 import Set exposing (..)
+import Set.Any as SA exposing (..)
 import Common exposing (..)
 import Dict as D
 
 import TabScripts as TabScripts
-import Tf2 exposing (Config)
 
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
-    , config : Tf2.Config
+    , config : Common.Config Msg
     }
 
 main : Program () Model Msg
@@ -32,7 +32,8 @@ main = Browser.application
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key = (Model key url <| Tf2.Config empty
+init flags url key = (Model key url <| Common.Config
+    (SA.empty (\sc -> sc.name))
     D.empty, Cmd.none)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -51,16 +52,16 @@ update msg model =
             , Cmd.none
             )
 
-        ToggleScript name -> -- Debug.todo "a"
-            let addsc cfg s = { cfg | scripts = insert s cfg.scripts }
-                remsc cfg s = { cfg | scripts = remove s cfg.scripts }
+        ToggleScript script -> -- Debug.todo "a"
+            let addsc cfg s = { cfg | scripts = SA.insert s cfg.scripts }
+                remsc cfg s = { cfg | scripts = SA.remove s cfg.scripts }
             in
-            if Set.member name model.config.scripts then
-                ( Debug.log "model" { model | config = remsc model.config name }
+            if SA.member script model.config.scripts then
+                ( Debug.log "model" { model | config = remsc model.config script }
                 , Cmd.none
                 )
             else
-                ( Debug.log "model" { model | config = addsc model.config name }
+                ( Debug.log "model" { model | config = addsc model.config script }
                 , Cmd.none
                 )
         ScriptOption key value ->
@@ -120,7 +121,7 @@ viewTab tabid model =
                 [ b [] [text x]
                 , p [] [text <| TabScripts.genScript model.config.scriptOpts x]
                 ]
-            ) <| Set.toList model.config.scripts
+            ) <| List.map (\sc -> sc.name) <| SA.toList model.config.scripts
 
         viewBinds =
             div []

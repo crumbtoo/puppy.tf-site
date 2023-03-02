@@ -1,27 +1,17 @@
 module TabScripts exposing
-    ( ScriptInfo
-    , allScripts
+    ( allScripts
     , tabHTML
     , genScript
     , genBinds
     )
 
 import Dict exposing (..)
-import Tf2 exposing (..)
 import Set exposing (..)
+import Set.Any as SA exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Common exposing (..)
-
-type alias ScriptInfo msg =
-    { prettyName : String
-    , desc : String
-    , name : String -- internal name
-    , classes : List Tf2.Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
-    -- , binds : Set String -- list of aliases needing binds
-    , options : Html msg
-    }
 
 allScripts : List (ScriptInfo Msg)
 allScripts =
@@ -69,12 +59,13 @@ allScripts =
                          
     ]
 
-tabHTML : Set String -> Html Msg
-tabHTML set = div [ class "scripts-container" ] <| List.map (viewScriptInfo set) allScripts
+tabHTML : AnySet String (ScriptInfo Msg) -> Html Msg
+tabHTML scripts = div [ class "scripts-container" ]
+    <| List.map (viewScriptInfo scripts) allScripts
 
-viewScriptInfo : Set String -> ScriptInfo Msg -> Html Msg
+viewScriptInfo : AnySet String (ScriptInfo Msg) -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =
-    let isEnabled = Set.member sc.name scriptset in
+    let isEnabled = SA.member sc scriptset in
     div
         [ classList
             [ ("script-info", True)
@@ -86,7 +77,7 @@ viewScriptInfo scriptset sc =
     , div [ class "info" ]
         [ div [ class "top-container" ]
             [ p [ class "name" ] [ text sc.prettyName ]
-            , button [ class "addbtn", onClick <| ToggleScript sc.name] [ text "add" ]
+            , button [ class "addbtn", onClick <| ToggleScript sc ] [ text "add" ]
             ]
         , p [ class "desc" ] [ text sc.desc ]
         , sc.options
@@ -113,5 +104,5 @@ genScript opts scriptID =
         "quick-teleport" -> "quikktp"
         _ -> Debug.todo "sorry bitch! elm has no fucking typeclasses!"
         
-genBinds : Set String -> Dict String String -> String
+genBinds : AnySet String (ScriptInfo msg) -> Dict String String -> String
 genBinds scripts opts = ""
