@@ -47,6 +47,7 @@ scripts =
                          [ type_ "text"
                          , placeholder "alert message"
                          , onInput <| ScriptOption "uber-alert:message"
+                         , value <| getopt opts "uber-alert:message"
                          ]
                          []
                      ]
