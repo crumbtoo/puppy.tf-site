@@ -33,7 +33,7 @@ main = Browser.application
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key = (Model key url <| Common.Config
-    (SA.empty (\sc -> sc.name))
+    (SA.empty Common.compareScript)
     D.empty, Cmd.none)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -113,15 +113,26 @@ viewTabButton ctab tabid =
 viewTab : String -> Model -> Html Msg
 viewTab tabid model =
     let viewScripts =
-            div [] <| List.map (\x ->
+            SA.toList model.config.scripts
+            |> List.map (\sc ->
                 p
                 [ style "background-color" "black"
                 , style "white-space" "pre-line"
                 ]
-                [ b [] [text x]
-                , p [] [text <| TabScripts.genScript model.config.scriptOpts x]
+                [ b [] [text sc.name]
+                , p [] [text <| sc.generate model.config.scriptOpts]
                 ]
-            ) <| List.map (\sc -> sc.name) <| SA.toList model.config.scripts
+            )
+            |> div []
+            -- div [] <| List.map (\sc ->
+            --     p
+            --     [ style "background-color" "black"
+            --     , style "white-space" "pre-line"
+            --     ]
+            --     [ b [] [text sc.name]
+            --     , p [] [text <| sc.genScript model.config.scriptOpts]
+            --     ]
+            -- ) <| SA.toList model.config.scripts
 
         viewBinds =
             div []

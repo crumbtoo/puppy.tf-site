@@ -1,6 +1,5 @@
 module TabScripts exposing
-    ( allScripts
-    , tabHTML
+    ( tabHTML
     , genScript
     , genBinds
     )
@@ -12,56 +11,11 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Common exposing (..)
-
-allScripts : List (ScriptInfo Msg)
-allScripts =
-    let opt html = div [ class "script-options" ] html in
-    [ ScriptInfo "Automatic Crouch Jump"
-                 "automatically crouch whenever you jump"
-                 "crouch-jump"
-                 allClasses
-                 <| opt []
-    , ScriptInfo "Übercharge Alert"
-                 "send a message notifying your team whenever you use Übercharge"
-                 "uber-alert"
-                 [Medic]
-                 <| opt
-                     [ input
-                         [ type_ "text"
-                         , placeholder "alert message"
-                         , onInput <| ScriptOption "uber-alert:message"
-                         ]
-                         []
-                     ]
-    , ScriptInfo "No-Drop"
-                 "switch to your Medi-gun and drop the intelligence when you attempt to use Über"
-                 "no-drop"
-                 [Medic]
-                 <| opt []
-    , ScriptInfo "Quick Teleport"
-                 "blah"
-                 "quick-teleport"
-                 [Engineer]
-                 <| opt
-                     [ input
-                         [ type_ "text"
-                         , placeholder "teleport key"
-                         , onInput <| ScriptOption "quick-teleport:tpkey"
-                         ]
-                         []
-                     , input
-                         [ type_ "text"
-                         , placeholder "modifier"
-                         , onInput <| ScriptOption "quick-teleport:modifier"
-                         ]
-                         []
-                     ]
-                         
-    ]
+import Scripts exposing (scripts)
 
 tabHTML : AnySet String (ScriptInfo Msg) -> Html Msg
 tabHTML scripts = div [ class "scripts-container" ]
-    <| List.map (viewScriptInfo scripts) allScripts
+    <| List.map (viewScriptInfo scripts) Scripts.scripts
 
 viewScriptInfo : AnySet String (ScriptInfo Msg) -> ScriptInfo Msg -> Html Msg
 viewScriptInfo scriptset sc =

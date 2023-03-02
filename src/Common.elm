@@ -15,6 +15,7 @@ type alias ScriptInfo msg =
     , desc : String
     , name : String -- internal name
     , classes : List Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
+    , generate : (Dict String String -> String)
     -- , binds : Set String -- list of aliases needing binds
     , options : Html msg
     }
@@ -40,19 +41,21 @@ allClasses = [ Scout, Soldier, Pyro
              , Medic, Sniper, Spy
              ]
 
-classToInt : Class -> Int
-classToInt c =
-    case c of
-        Scout        -> 1
-        Soldier      -> 2
-        Pyro         -> 3
-        Demoman      -> 4
-        Heavyweapons -> 5
-        Engineer     -> 6
-        Medic        -> 7
-        Sniper       -> 8
-        Spy          -> 9
+-- classToInt : Class -> Int
+-- classToInt c =
+--     case c of
+--         Scout        -> 1
+--         Soldier      -> 2
+--         Pyro         -> 3
+--         Demoman      -> 4
+--         Heavyweapons -> 5
+--         Engineer     -> 6
+--         Medic        -> 7
+--         Sniper       -> 8
+--         Spy          -> 9
 
+compareScript : ScriptInfo msg -> String
+compareScript = .name
 
 type Msg = LinkClicked Browser.UrlRequest
          | UrlChanged Url.Url
