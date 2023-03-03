@@ -25,8 +25,6 @@ alias n v =
 -- its arguments in quotes
 alias_ : String -> String -> String
 alias_ n v =
-    let rq = String.replace "\"" "'"
-    in
     "alias " ++ rq n ++ " " ++ rq v
 
 getoptWarn : Dict String String -> String -> String
@@ -83,7 +81,7 @@ scripts scriptopts =
                  [Medic]
                  (\opts ->
                     alias_ "uber_alert"
-                        ("say_team " ++ getoptWarn opts "uber-alert:message")
+                        <| quote ("say_team " ++ getoptWarn opts "uber-alert:message")
                  )
                  [ (Just "medic-use", "uber_alert")
                  ]
