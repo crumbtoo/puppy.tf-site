@@ -117,17 +117,15 @@ viewTabButton ctab tabid =
 
 viewTab : String -> Model -> Html Msg
 viewTab tabid model =
-    case tabid of
-        "scripts" ->
-            TabScripts.tabHTML model.config.scripts model.config.scriptOpts
-        "binds" ->
-            text "binds go here"
-        "blocks" ->
-            text "this one will be hard.,"
-        "preview" ->
-            viewPreview model
-        _ ->
-            text "none lol"
+    let h tname content =
+            div
+            [ hidden <| tname /= tabid ] -- hide if not tname
+            [ content ]
+    in
+    div []
+    [ h "scripts" <| TabScripts.tabHTML model.config.scripts model.config.scriptOpts
+    , h "preview" <| viewPreview model
+    ]
 
 viewPreview : Model -> Html msg
 viewPreview model = 
@@ -163,3 +161,4 @@ viewPreview model =
     [ viewScripts
     , viewBinds
     ]
+
