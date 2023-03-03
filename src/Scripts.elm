@@ -14,7 +14,7 @@ alias : String -> String -> String
 alias n v =
     let rq = String.replace "\"" "'"
     in
-    "alias \"" ++ rq n ++ "\" \"" ++ rq v ++ "\"\n"
+    "alias \"" ++ rq n ++ "\" \"" ++ rq v ++ "\""
 
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
@@ -30,7 +30,7 @@ getopt opts opt = Maybe.withDefault ""
     <| Dict.get opt opts
 
 mklines : List String -> String
-mklines = List.foldr (++) ""
+mklines = List.foldr (\a b -> a ++ "\n" ++ b) ""
 
 keybtn : Html msg
 keybtn =
