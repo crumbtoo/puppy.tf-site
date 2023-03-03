@@ -65,7 +65,6 @@ scripts scriptopts =
 {-----------------------------------------------------------------------------------------}
     [ ScriptInfo "Automatic Crouch Jump"
                  "automatically crouch whenever you jump"
-                 "crouch-jump"
                  allClasses
                  (\opts ->
                      mklines
@@ -79,7 +78,6 @@ scripts scriptopts =
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "Übercharge Alert"
                  "send a message notifying your team whenever you use Übercharge"
-                 "uber-alert"
                  [Medic]
                  (\opts ->
                     alias "uber_alert" ("say_team "
@@ -99,7 +97,6 @@ scripts scriptopts =
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "No-Drop"
                  "switch to your Medi-gun and drop the intelligence when you attempt to use Über"
-                 "no-drop"
                  [Medic]
                  (\opts ->
                      alias "no-drop" "slot2; dropitem"
@@ -110,7 +107,6 @@ scripts scriptopts =
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "Quick Teleport"
                  "blah"
-                 "quick-teleport"
                  [Engineer]
                  (\opts ->
                      -- TODO: add an option to change which destination

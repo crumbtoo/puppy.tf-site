@@ -12,9 +12,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 type alias ScriptInfo msg =
-    { prettyName : String
+    { name : String
     , desc : String
-    , name : String -- internal name
     , classes : List Class
     , generate : (Dict String String -> String)
 

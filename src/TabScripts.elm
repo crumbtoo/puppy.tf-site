@@ -29,7 +29,7 @@ viewScriptInfo scriptset sc =
         []
     , div [ class "info" ]
         [ div [ class "top-container" ]
-            [ p [ class "name" ] [ text sc.prettyName ]
+            [ p [ class "name" ] [ text sc.name ]
             , button [ class "addbtn", onClick <| ToggleScript sc ] [ text "add" ]
             ]
         , p [ class "desc" ] [ text sc.desc ]
