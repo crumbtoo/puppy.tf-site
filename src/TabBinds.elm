@@ -1,11 +1,15 @@
 module TabBinds exposing
     ( genBinds
+    , tabHTML
     )
 
 import Set.Any as SA exposing (..)
 import Dict exposing (Dict)
 import Binds
 import Common exposing (..)
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (..)
 import ScriptGen exposing (..)
 
 genBinds : Dict TF2Key String -> AnySet String (ScriptInfo msg) -> String
@@ -22,3 +26,5 @@ genGroupBinds set group =
     |> List.map (\sc -> sc.exportedBinds)
     |> (\_ -> Nothing)
 
+tabHTML : Config msg -> Html msg
+tabHTML cfg = div [] [ text "uhh...." ]

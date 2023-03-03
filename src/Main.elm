@@ -87,6 +87,7 @@ view model =
     { title = "puppy.tf"
     , body =
         [ div [ class "sidebar" ] <| viewTabButtons frag
+            -- TODO: misc tab. like uploading a spray etc
             [ "scripts"
             , "binds"
             , "blocks"
@@ -125,8 +126,12 @@ viewTab tabid model =
             [ hidden <| tname /= tabid ] -- hide if not tname
             [ content ]
     in
+    -- TODO: add error message floating behind tab content,
+    -- making it visible when no content is displayed over
+    -- it.
     div []
     [ h "scripts" <| TabScripts.tabHTML model.config.scripts model.config.scriptOpts
+    , h "binds"   <| TabBinds.tabHTML model.config
     , h "preview" <| viewPreview model
     ]
 
