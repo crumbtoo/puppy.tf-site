@@ -87,9 +87,9 @@ scripts scriptopts =
                  "no-drop"
                  [Medic]
                  (\opts ->
-                     "hi"
+                     mkalias "no-drop" "slot2; dropitem"
                  )
-                 [ (Just "medic-use", "uber_alert")
+                 [ (Just "medic-use", "no-drop")
                  ]
                  <| opt []
 {-----------------------------------------------------------------------------------------}
