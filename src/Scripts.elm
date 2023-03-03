@@ -17,15 +17,13 @@ quote s = "\"" ++ s ++ "\""
 -- all double quotes in `n` or `v` are replaced with single-quotes
 alias : String -> String -> String
 alias n v =
-    let rq = String.replace "\"" "'"
-    in
-    "alias \"" ++ rq n ++ "\" \"" ++ rq v ++ "\""
+    "alias \"" ++ n ++ "\" \"" ++ v ++ "\""
 
 -- marginally less safe version of `alias` which doesn't wrap
 -- its arguments in quotes
 alias_ : String -> String -> String
 alias_ n v =
-    "alias " ++ rq n ++ " " ++ rq v
+    "alias " ++ n ++ " " ++ v
 
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
@@ -74,6 +72,16 @@ scripts scriptopts =
                  )
                  [ (Just "jump", "+crouch_jump")
                  ]
+                 <| opt []
+{-----------------------------------------------------------------------------------------}
+    , ScriptInfo "Kill Bind"
+                 "instantly die with a key press"
+                 allClasses
+                 (\opts ->
+                     -- TODO: add option for explode
+                     alias "kill_bind" "kill"
+                 )
+                 []
                  <| opt []
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "Übercharge Alert"
