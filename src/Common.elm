@@ -15,9 +15,13 @@ type alias ScriptInfo msg =
     { prettyName : String
     , desc : String
     , name : String -- internal name
-    , classes : List Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
+    , classes : List Class
     , generate : (Dict String String -> String)
-    , exportedBinds : List String -- list of aliases needing binds
+
+    -- first part of this pair is the alias's group. scripts
+    -- can share a keybind with scripts in the same group.
+    -- ex. +attack2, uber-alert, and no-drop.
+    , exportedBinds : List (Maybe String, String) -- list of aliases needing binds
     , options : Html msg
     }
 

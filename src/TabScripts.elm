@@ -1,6 +1,5 @@
 module TabScripts exposing
     ( tabHTML
-    , genScript
     , genBinds
     )
 
@@ -38,25 +37,9 @@ viewScriptInfo scriptset sc =
         ]
     ]
 
--- elm is so frusterating. this would be 100x safer with
--- typeclasses
-genScript : Dict String String -> String -> String
-genScript opts scriptID =
-    let mkalias n v = "alias \"" ++ n ++ "\" \"" ++ v ++ "\"\n"
-        getopt opt = Maybe.withDefault opt <| Dict.get opt opts
-        mklines = List.foldr (++) ""
-    in
-    case scriptID of
-        "crouch-jump" -> mklines
-            [ mkalias "+crouch_jump"  "+jump; +duck"
-            , mkalias "-crouch_jump"  "-jump; -duck"
-            ]
-
-        "uber-alert" ->
-            mkalias "uber_alert" ("say_team " ++ getopt "uber-alert:message")
-        "no-drop" -> "nodop"
-        "quick-teleport" -> "quikktp"
-        _ -> Debug.todo "sorry bitch! elm has no fucking typeclasses!"
-        
 genBinds : AnySet String (ScriptInfo msg) -> Dict String String -> String
 genBinds scripts opts = ""
+
+-- genInGroup : AnySet String (ScriptInfo Msg) -> String -> Maybe String
+-- genInGroup s group = SA.filter (/= []) s.exportedBinds |> 
+

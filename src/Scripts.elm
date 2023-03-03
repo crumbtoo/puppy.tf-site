@@ -58,7 +58,7 @@ scripts scriptopts =
                         , mkalias "-crouch_jump"  "-jump; -duck"
                         ]
                  )
-                 [ "+crouch_jump"
+                 [ (Just "jump", "+crouch_jump")
                  ]
                  <| opt []
 {-----------------------------------------------------------------------------------------}
@@ -70,7 +70,7 @@ scripts scriptopts =
                     mkalias "uber_alert" ("say_team "
                         ++ getoptWarn opts "uber-alert:message")
                  )
-                 [ "uber_alert"
+                 [ (Just "medic-use", "uber_alert")
                  ]
                  <| opt
                      [ input
@@ -89,7 +89,8 @@ scripts scriptopts =
                  (\opts ->
                      "hi"
                  )
-                 []
+                 [ (Just "medic-use", "uber_alert")
+                 ]
                  <| opt []
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "Quick Teleport"
