@@ -4,11 +4,21 @@ module TabBinds exposing
 
 import Set.Any as SA exposing (..)
 import Dict exposing (Dict)
+import Binds
 import Common exposing (..)
+import ScriptGen exposing (..)
 
-genBinds : AnySet String (ScriptInfo msg) -> Dict String String -> String
-genBinds scripts opts = ""
+genBinds : Dict TF2Key String -> AnySet String (ScriptInfo msg) -> String
+genBinds binds scripts =
+    Dict.foldl (\k v acc -> bind k v :: acc) [] binds
+    |> mklines
 
--- genInGroup : AnySet String (ScriptInfo Msg) -> String -> Maybe String
--- genInGroup s group = SA.filter (/= []) s.exportedBinds |> 
+-- genClassBinds : AnySet String (ScriptInfo msg) -> Class -> String
+-- genClassBinds class = 
+
+genGroupBinds : AnySet String (ScriptInfo Msg) -> String -> Maybe String
+genGroupBinds set group =
+    SA.toList set -- give me typeclasses so i dont have to do this lol
+    |> List.map (\sc -> sc.exportedBinds)
+    |> (\_ -> Nothing)
 

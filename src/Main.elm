@@ -11,6 +11,7 @@ import Set exposing (..)
 import Set.Any as SA exposing (..)
 import Dict.Any as DA exposing (..)
 import Common exposing (..)
+import Binds exposing (..)
 import Dict as D
 
 import TabScripts as TabScripts
@@ -39,7 +40,8 @@ init flags url key =
         <| Common.Config
             (SA.empty Common.compareScript)
             D.empty
-            D.empty
+            Binds.defaultBinds
+            (DA.empty Common.compareClass)
     , Cmd.none)
 
 update : Msg -> Model -> (Model, Cmd Msg)
@@ -152,8 +154,8 @@ viewPreview model =
                 [ b [] [text "binds"]
                 , p []
                     [ text <| TabBinds.genBinds
+                        model.config.binds
                         model.config.scripts
-                        model.config.scriptOpts
                     ]
                 ]
             ]

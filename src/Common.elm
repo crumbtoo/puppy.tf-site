@@ -11,6 +11,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
+type alias TF2Key = String
+
+type alias TF2Bindings = Dict String String
+
 type alias ScriptInfo msg =
     { name : String
     , desc : String
@@ -27,7 +31,8 @@ type alias ScriptInfo msg =
 type alias Config msg =
     { scripts : AnySet String (ScriptInfo msg)
     , scriptOpts : Dict String String
-    , binds : Dict String String
+    , binds : TF2Bindings
+    , classBinds : AnyDict Int Class TF2Bindings
     }
 
 type Class = Scout
@@ -46,18 +51,18 @@ allClasses = [ Scout, Soldier, Pyro
              , Medic, Sniper, Spy
              ]
 
--- classToInt : Class -> Int
--- classToInt c =
---     case c of
---         Scout        -> 1
---         Soldier      -> 2
---         Pyro         -> 3
---         Demoman      -> 4
---         Heavyweapons -> 5
---         Engineer     -> 6
---         Medic        -> 7
---         Sniper       -> 8
---         Spy          -> 9
+compareClass : Class -> Int
+compareClass c =
+    case c of
+        Scout        -> 1
+        Soldier      -> 2
+        Pyro         -> 3
+        Demoman      -> 4
+        Heavyweapons -> 5
+        Engineer     -> 6
+        Medic        -> 7
+        Sniper       -> 8
+        Spy          -> 9
 
 compareScript : ScriptInfo msg -> String
 compareScript = .name
@@ -66,3 +71,4 @@ type Msg = LinkClicked Browser.UrlRequest
          | UrlChanged Url.Url
          | ToggleScript (ScriptInfo Msg)
          | ScriptOption String String
+
