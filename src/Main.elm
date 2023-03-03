@@ -123,7 +123,8 @@ viewTab : String -> Model -> Html Msg
 viewTab tabid model =
     let h tname content =
             div
-            [ hidden <| tname /= tabid ] -- hide if not tname
+            [ hidden <| tname /= tabid -- hide if not tname
+            , class "tab-container" ]
             [ content ]
     in
     -- TODO: add error message floating behind tab content,
