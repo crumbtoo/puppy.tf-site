@@ -8,6 +8,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Common exposing (..)
 
+quote : String -> String
+quote s = "\"" ++ s ++ "\""
 
 -- TODO: move the alias functions to their own file once the tf2
 -- scriptgen api grows.
@@ -80,8 +82,8 @@ scripts scriptopts =
                  "send a message notifying your team whenever you use Übercharge"
                  [Medic]
                  (\opts ->
-                    alias "uber_alert" ("say_team "
-                        ++ getoptWarn opts "uber-alert:message")
+                    alias_ "uber_alert"
+                        ("say_team " ++ getoptWarn opts "uber-alert:message")
                  )
                  [ (Just "medic-use", "uber_alert")
                  ]
