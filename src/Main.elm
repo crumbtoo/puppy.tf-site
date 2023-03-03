@@ -32,7 +32,7 @@ main = Browser.application
        }
 
 
-init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
+init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
 init flags url key =
     ( Model key url
         <| Common.Config
@@ -41,7 +41,7 @@ init flags url key =
             D.empty
     , Cmd.none)
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         LinkClicked urlRequest ->
