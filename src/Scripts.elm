@@ -16,6 +16,14 @@ alias n v =
     in
     "alias \"" ++ rq n ++ "\" \"" ++ rq v ++ "\""
 
+-- marginally less safe version of `alias` which doesn't wrap
+-- its arguments in quotes
+alias_ : String -> String -> String
+alias_ n v =
+    let rq = String.replace "\"" "'"
+    in
+    "alias " ++ rq n ++ " " ++ rq v
+
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
     let warning = "puppy.tf: unset option: '" ++ opt ++ "'"
@@ -102,7 +110,18 @@ scripts scriptopts =
                  "quick-teleport"
                  [Engineer]
                  (\opts ->
-                     ""
+                     -- TODO: add an option to change which destination
+                     -- is selected by the modifier bind, and which is by
+                     -- the unmodified bind
+                     -- or just allow creating modifier binds for
+                     -- anything that needs to be bound.
+                     mklines
+                     [ alias "quick_teleport" "_tp_spawn"
+                     , alias "_tp_spawn" "eureka_teleport 0"
+                     , alias "_tp_exit"  "eureka_teleport 1"
+                     , alias "+change_tp" <| alias_ "quick_teleport" "_tp_exit"
+                     , alias "-change_tp" <| alias_ "quick_teleport" "_tp_spawn"
+                     ]
                  )
                  []
                  <| opt
