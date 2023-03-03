@@ -10,7 +10,7 @@ $sidebar-width: 150px;
 	background: theme.$crust;
 	width: $sidebar-width;
 	height: 100%;
-	position: absolute;
+    position: fixed;
 	right: 0;
 	top: 0;
 	padding-top: 40px;
