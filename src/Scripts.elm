@@ -9,6 +9,9 @@ import Html.Events exposing (..)
 import Common exposing (..)
 
 
+-- TODO: move the alias functions to their own file once the tf2
+-- scriptgen api grows.
+
 -- all double quotes in `n` or `v` are replaced with single-quotes
 alias : String -> String -> String
 alias n v =
@@ -124,22 +127,7 @@ scripts scriptopts =
                      ]
                  )
                  []
-                 <| opt
-                     [ input
-                         [ type_ "text"
-                         , placeholder "teleport key"
-                         , onInput <| ScriptOption "quick-teleport:tpkey"
-                         , value <| getopt scriptopts "quick-teleport:tpkey"
-                         ]
-                         []
-                     , input
-                         [ type_ "text"
-                         , placeholder "modifier"
-                         , onInput <| ScriptOption "quick-teleport:modifier"
-                         , value <| getopt scriptopts "quick-teleport:modifier"
-                         ]
-                         []
-                     ]
+                 <| opt []
 {-----------------------------------------------------------------------------------------}
     ]
 
