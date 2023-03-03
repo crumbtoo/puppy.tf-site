@@ -1,15 +1,19 @@
 module ScriptGen exposing
     ( quote
+    , mklines
     , alias
     , alias_
-    , mklines
+    , bind
+    , bind_
     )
+
+import Common exposing (TF2Key)
+
+mklines : List String -> String
+mklines = List.foldr (\a b -> a ++ "\n" ++ b) ""
 
 quote : String -> String
 quote s = "\"" ++ s ++ "\""
-
--- TODO: move the alias functions to their own file once the tf2
--- scriptgen api grows.
 
 -- all double quotes in `n` or `v` are replaced with single-quotes
 alias : String -> String -> String
@@ -22,6 +26,8 @@ alias_ : String -> String -> String
 alias_ n v =
     "alias " ++ n ++ " " ++ v
 
-mklines : List String -> String
-mklines = List.foldr (\a b -> a ++ "\n" ++ b) ""
+bind : TF2Key -> String -> String
+bind k v = "bind " ++ quote k ++ " " ++ quote v
 
+bind_ : TF2Key -> String -> String
+bind_ k v = "bind " ++ quote k ++ " " ++ v
