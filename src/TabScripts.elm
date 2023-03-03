@@ -1,6 +1,5 @@
 module TabScripts exposing
     ( tabHTML
-    , genBinds
     )
 
 import Dict exposing (..)
@@ -36,10 +35,4 @@ viewScriptInfo scriptset sc =
         , sc.options
         ]
     ]
-
-genBinds : AnySet String (ScriptInfo msg) -> Dict String String -> String
-genBinds scripts opts = ""
-
--- genInGroup : AnySet String (ScriptInfo Msg) -> String -> Maybe String
--- genInGroup s group = SA.filter (/= []) s.exportedBinds |> 
 

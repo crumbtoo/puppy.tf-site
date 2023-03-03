@@ -14,6 +14,7 @@ import Common exposing (..)
 import Dict as D
 
 import TabScripts as TabScripts
+import TabBinds as TabBinds
 
 type alias Model =
     { key : Nav.Key
@@ -150,7 +151,7 @@ viewPreview model =
                 ]
                 [ b [] [text "binds"]
                 , p []
-                    [ text <| TabScripts.genBinds
+                    [ text <| TabBinds.genBinds
                         model.config.scripts
                         model.config.scriptOpts
                     ]
