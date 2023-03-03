@@ -117,6 +117,20 @@ viewTabButton ctab tabid =
 
 viewTab : String -> Model -> Html Msg
 viewTab tabid model =
+    case tabid of
+        "scripts" ->
+            TabScripts.tabHTML model.config.scripts model.config.scriptOpts
+        "binds" ->
+            text "binds go here"
+        "blocks" ->
+            text "this one will be hard.,"
+        "preview" ->
+            viewPreview model
+        _ ->
+            text "none lol"
+
+viewPreview : Model -> Html msg
+viewPreview model = 
     let viewScripts =
             SA.toList model.config.scripts
             |> List.map (\sc ->
@@ -145,20 +159,7 @@ viewTab tabid model =
                 ]
             ]
     in
-    case tabid of
-        "scripts" ->
-            TabScripts.tabHTML model.config.scripts model.config.scriptOpts
-        "binds" ->
-            text "binds go here"
-        "blocks" ->
-            text "this one will be hard.,"
-        "preview" ->
-            div []
-            [ viewScripts
-            , viewBinds
-            ]
-
-        _ ->
-            text "none lol"
-
-
+    div []
+    [ viewScripts
+    , viewBinds
+    ]
