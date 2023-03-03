@@ -7,23 +7,7 @@ import Dict exposing (Dict)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Common exposing (..)
-
-quote : String -> String
-quote s = "\"" ++ s ++ "\""
-
--- TODO: move the alias functions to their own file once the tf2
--- scriptgen api grows.
-
--- all double quotes in `n` or `v` are replaced with single-quotes
-alias : String -> String -> String
-alias n v =
-    "alias \"" ++ n ++ "\" \"" ++ v ++ "\""
-
--- marginally less safe version of `alias` which doesn't wrap
--- its arguments in quotes
-alias_ : String -> String -> String
-alias_ n v =
-    "alias " ++ n ++ " " ++ v
+import ScriptGen exposing (quote, alias_, alias, mklines)
 
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
@@ -37,9 +21,6 @@ getoptWarn opts opt =
 getopt : Dict String String -> String -> String
 getopt opts opt = Maybe.withDefault ""
     <| Dict.get opt opts
-
-mklines : List String -> String
-mklines = List.foldr (\a b -> a ++ "\n" ++ b) ""
 
 keybtn : Html msg
 keybtn =
