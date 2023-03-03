@@ -137,9 +137,11 @@ viewTab tabid model =
                 , style "white-space" "pre-line"
                 ]
                 [ b [] [text "binds"]
-                , p [] [text <| TabScripts.genBinds
-                    model.config.scripts
-                    model.config.scriptOpts]
+                , p []
+                    [ text <| TabScripts.genBinds
+                        model.config.scripts
+                        model.config.scriptOpts
+                    ]
                 ]
             ]
     in
