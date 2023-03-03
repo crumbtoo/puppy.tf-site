@@ -9,8 +9,12 @@ import Html.Events exposing (..)
 import Common exposing (..)
 
 
-mkalias : String -> String -> String
-mkalias n v = "alias \"" ++ n ++ "\" \"" ++ v ++ "\"\n"
+-- all double quotes in `n` or `v` are replaced with single-quotes
+alias : String -> String -> String
+alias n v =
+    let rq = String.replace "\"" "'"
+    in
+    "" ++ rq n ++ "\" \"" ++ rq v ++ "\"\n"
 
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
@@ -54,8 +58,8 @@ scripts scriptopts =
                  allClasses
                  (\opts ->
                      mklines
-                        [ mkalias "+crouch_jump"  "+jump; +duck"
-                        , mkalias "-crouch_jump"  "-jump; -duck"
+                        [ alias "+crouch_jump"  "+jump; +duck"
+                        , alias "-crouch_jump"  "-jump; -duck"
                         ]
                  )
                  [ (Just "jump", "+crouch_jump")
@@ -67,7 +71,7 @@ scripts scriptopts =
                  "uber-alert"
                  [Medic]
                  (\opts ->
-                    mkalias "uber_alert" ("say_team "
+                    alias "uber_alert" ("say_team "
                         ++ getoptWarn opts "uber-alert:message")
                  )
                  [ (Just "medic-use", "uber_alert")
@@ -87,7 +91,7 @@ scripts scriptopts =
                  "no-drop"
                  [Medic]
                  (\opts ->
-                     mkalias "no-drop" "slot2; dropitem"
+                     alias "no-drop" "slot2; dropitem"
                  )
                  [ (Just "medic-use", "no-drop")
                  ]
@@ -98,7 +102,7 @@ scripts scriptopts =
                  "quick-teleport"
                  [Engineer]
                  (\opts ->
-                     "hi"
+                     ""
                  )
                  []
                  <| opt
