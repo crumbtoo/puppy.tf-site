@@ -14,7 +14,7 @@ alias : String -> String -> String
 alias n v =
     let rq = String.replace "\"" "'"
     in
-    "" ++ rq n ++ "\" \"" ++ rq v ++ "\"\n"
+    "alias \"" ++ rq n ++ "\" \"" ++ rq v ++ "\"\n"
 
 getoptWarn : Dict String String -> String -> String
 getoptWarn opts opt = 
