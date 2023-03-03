@@ -6,6 +6,7 @@ import Url
 import Set exposing (..)
 import Dict exposing (..)
 import Set.Any exposing (..)
+import Dict.Any exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -16,13 +17,14 @@ type alias ScriptInfo msg =
     , name : String -- internal name
     , classes : List Class -- give me my fucking typeclasses back i beg. i wanted to use `Set`
     , generate : (Dict String String -> String)
-    -- , binds : Set String -- list of aliases needing binds
+    , exportedBinds : List String -- list of aliases needing binds
     , options : Html msg
     }
 
 type alias Config msg =
     { scripts : AnySet String (ScriptInfo msg)
     , scriptOpts : Dict String String
+    , binds : Dict String String
     }
 
 type Class = Scout

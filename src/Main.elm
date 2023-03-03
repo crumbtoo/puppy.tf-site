@@ -9,6 +9,7 @@ import Url
 import Url.Builder as UB
 import Set exposing (..)
 import Set.Any as SA exposing (..)
+import Dict.Any as DA exposing (..)
 import Common exposing (..)
 import Dict as D
 
@@ -32,9 +33,13 @@ main = Browser.application
 
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
-init flags url key = (Model key url <| Common.Config
-    (SA.empty Common.compareScript)
-    D.empty, Cmd.none)
+init flags url key =
+    ( Model key url
+        <| Common.Config
+            (SA.empty Common.compareScript)
+            D.empty
+            D.empty
+    , Cmd.none)
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =

@@ -28,6 +28,22 @@ getopt opts opt = Maybe.withDefault ""
 mklines : List String -> String
 mklines = List.foldr (++) ""
 
+keybtn : Html msg
+keybtn =
+    div [ class "keybtn" ]
+    [ button
+        [ class "ask-key"
+        ]
+        []
+    , input
+        [ class "key-name"
+        , type_ "text"
+        , placeholder "key"
+        ]
+        []
+    ]
+
+
 scripts : Dict String String -> List (ScriptInfo Msg)
 scripts scriptopts =
     let opt html = div [ class "script-options" ] html in
@@ -42,6 +58,8 @@ scripts scriptopts =
                         , mkalias "-crouch_jump"  "-jump; -duck"
                         ]
                  )
+                 [ "+crouch_jump"
+                 ]
                  <| opt []
 {-----------------------------------------------------------------------------------------}
     , ScriptInfo "Übercharge Alert"
@@ -52,6 +70,8 @@ scripts scriptopts =
                     mkalias "uber_alert" ("say_team "
                         ++ getoptWarn opts "uber-alert:message")
                  )
+                 [ "uber_alert"
+                 ]
                  <| opt
                      [ input
                          [ type_ "text"
@@ -69,7 +89,9 @@ scripts scriptopts =
                  (\opts ->
                      "hi"
                  )
+                 []
                  <| opt []
+{-----------------------------------------------------------------------------------------}
     , ScriptInfo "Quick Teleport"
                  "blah"
                  "quick-teleport"
@@ -77,6 +99,7 @@ scripts scriptopts =
                  (\opts ->
                      "hi"
                  )
+                 []
                  <| opt
                      [ input
                          [ type_ "text"
