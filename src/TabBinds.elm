@@ -38,7 +38,7 @@ viewTab pbinds = pbinds
                 , value k
                 , classList
                     [ ("key-name", True)
-                    , ("invalid", not (Set.member k Binds.bindableKeys))
+                    , ("invalid", not (Set.member (String.toUpper k) Binds.bindableKeys))
                     ]
                 , onInput <| \x -> UpdateUserBind i x v
                 ]
