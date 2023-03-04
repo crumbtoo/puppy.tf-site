@@ -28,8 +28,9 @@ genGroupBinds set group =
     |> (\_ -> Nothing)
 
 viewTab : List (Int, TF2Key, String) -> Html Msg
-viewTab pbinds = pbinds
-    |> List.map (\ (i,k,v) ->
+viewTab pbinds =
+    let isBindable s = Set.member (String.toUpper s) Binds.bindableKeys in
+    pbinds |> List.map (\ (i,k,v) ->
         div
             [ class "box bind-box"
             ]
@@ -38,7 +39,7 @@ viewTab pbinds = pbinds
                 , value k
                 , classList
                     [ ("key-name", True)
-                    , ("invalid", not (Set.member (String.toUpper k) Binds.bindableKeys))
+                    , ("invalid", not <| isBindable k)
                     ]
                 , onInput <| \x -> UpdateUserBind i x v
                 ]
