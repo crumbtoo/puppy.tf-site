@@ -20,6 +20,8 @@ import TabBinds as TabBinds
 type alias Model =
     { key : Nav.Key
     , url : Url.Url
+    -- unvalidated binds; not yet added to config.binds
+    , userBinds : List (Int, TF2Key, String)
     , config : Common.Config Msg
     }
 
@@ -33,10 +35,22 @@ main = Browser.application
        , onUrlRequest = LinkClicked
        }
 
+-- why does the stl have unzip but not zip lmao
+zip : List a -> List b -> List (a, b)
+zip la lb = List.map2 Tuple.pair la lb
+
+-- no [0..x] notation :(
+index : List a -> List (Int, a)
+index ls =
+    let rzip a b = zip b a in
+    rzip ls <| List.range 0 <| List.length ls
+
+flattenPP : List (a, (b, c)) -> List (a, b, c)
+flattenPP = List.map (\ (a,(b,c)) -> (a,b,c))
 
 init : () -> Url.Url -> Nav.Key -> (Model, Cmd Msg)
 init flags url key =
-    ( Model key url
+    ( Model key url (D.toList Binds.defaultBinds |> index |> flattenPP)
         <| Common.Config
             (SA.empty Common.compareScript)
             D.empty
@@ -133,7 +147,7 @@ viewTab tabid model =
     -- it.
     div []
     [ h "scripts" <| TabScripts.tabHTML model.config.scripts model.config.scriptOpts
-    , h "binds"   <| TabBinds.tabHTML model.config
+    , h "binds"   <| TabBinds.tabHTML model.userBinds
     , h "preview" <| viewPreview model
     ]
 

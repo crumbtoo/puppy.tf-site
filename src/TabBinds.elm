@@ -26,9 +26,9 @@ genGroupBinds set group =
     |> List.map (\sc -> sc.exportedBinds)
     |> (\_ -> Nothing)
 
-tabHTML : Config msg -> Html Msg
-tabHTML cfg = Dict.toList cfg.binds
-    |> List.map (\ (k,v) ->
+tabHTML : List (Int, TF2Key, String) -> Html Msg
+tabHTML pbinds = pbinds
+    |> List.map (\ (i,k,v) ->
         div
             [ class "box bind-box"
             ]
