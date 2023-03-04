@@ -94,6 +94,23 @@ update msg model =
                 model.config key value }
             , Cmd.none
             )
+        UpdateUserBind i k v ->
+            -- would've been cleaer if i could use multiple function
+            -- declarations to pattern match..
+            let replaceI : Int -> List a -> a -> List a
+                replaceI ind ls l =
+                    case ls of
+                        [] ->
+                            []
+                        (x::xs) ->
+                            case ind of
+                                0 -> l :: xs
+                                _ -> x :: (replaceI (ind - 1) xs l)
+            in
+            ( { model | userBinds = replaceI i model.userBinds
+                (Debug.log "UpdateUserBind" (i,k,v)) }
+            , Cmd.none
+            )
 
 
 view : Model -> Browser.Document Msg
@@ -146,8 +163,8 @@ viewTab tabid model =
     -- making it visible when no content is displayed over
     -- it.
     div []
-    [ h "scripts" <| TabScripts.tabHTML model.config.scripts model.config.scriptOpts
-    , h "binds"   <| TabBinds.tabHTML model.userBinds
+    [ h "scripts" <| TabScripts.viewTab model.config.scripts model.config.scriptOpts
+    , h "binds"   <| TabBinds.viewTab model.userBinds
     , h "preview" <| viewPreview model
     ]
 

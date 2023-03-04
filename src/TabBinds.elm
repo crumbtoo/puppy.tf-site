@@ -1,6 +1,6 @@
 module TabBinds exposing
     ( genBinds
-    , tabHTML
+    , viewTab
     )
 
 import Set.Any as SA exposing (..)
@@ -26,8 +26,8 @@ genGroupBinds set group =
     |> List.map (\sc -> sc.exportedBinds)
     |> (\_ -> Nothing)
 
-tabHTML : List (Int, TF2Key, String) -> Html Msg
-tabHTML pbinds = pbinds
+viewTab : List (Int, TF2Key, String) -> Html Msg
+viewTab pbinds = pbinds
     |> List.map (\ (i,k,v) ->
         div
             [ class "box bind-box"
@@ -36,12 +36,14 @@ tabHTML pbinds = pbinds
                 [ class "key-name"
                 , type_ "text"
                 , value k
+                , onInput <| \x -> UpdateUserBind i x v
                 ]
                 []
             , input
                 [ class "bound-to"
                 , type_ "text"
                 , value v
+                , onInput <| \x -> UpdateUserBind i k x
                 ]
                 []
             ]

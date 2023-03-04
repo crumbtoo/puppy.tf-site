@@ -71,4 +71,5 @@ type Msg = LinkClicked Browser.UrlRequest
          | UrlChanged Url.Url
          | ToggleScript (ScriptInfo Msg)
          | ScriptOption String String
+         | UpdateUserBind Int String String
 

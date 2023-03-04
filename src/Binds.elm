@@ -71,4 +71,3 @@ defaultBinds = Dict.fromList
     , ("j",           "cl_trigger_first_notification")
     ]
 
-
