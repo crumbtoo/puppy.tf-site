@@ -3,6 +3,7 @@ module TabBinds exposing
     , viewTab
     )
 
+import Set
 import Set.Any as SA exposing (..)
 import Dict exposing (Dict)
 import Binds
@@ -33,18 +34,17 @@ viewTab pbinds = pbinds
             [ class "box bind-box"
             ]
             [ input -- TODO: i want to have icons for keys / mouse buttons in the future.
-                [ classList
-                    [ ("key-name", True)
-                    ]
-                , type_ "text"
+                [ type_ "text"
                 , value k
+                , classList
+                    [ ("key-name", True)
+                    , ("invalid", not (Set.member k Binds.bindableKeys))
+                    ]
                 , onInput <| \x -> UpdateUserBind i x v
                 ]
                 []
             , input
-                [ classList
-                    [ ("bound-to", True)
-                    ]
+                [ class "bound-to"
                 , type_ "text"
                 , value v
                 , onInput <| \x -> UpdateUserBind i k x
