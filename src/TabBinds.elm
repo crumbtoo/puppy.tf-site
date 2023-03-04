@@ -26,20 +26,22 @@ genGroupBinds set group =
     |> List.map (\sc -> sc.exportedBinds)
     |> (\_ -> Nothing)
 
-tabHTML : Config msg -> Html msg
+tabHTML : Config msg -> Html Msg
 tabHTML cfg = Dict.toList cfg.binds
     |> List.map (\ (k,v) ->
         div
             [ class "box bind-box"
             ]
-            [ input
+            [ input -- TODO: i want to have icons for keys / mouse buttons in the future.
                 [ class "key-name"
                 , type_ "text"
                 , value k
                 ]
                 []
-            , button
-                [ class "key-button"
+            , input
+                [ class "bound-to"
+                , type_ "text"
+                , value v
                 ]
                 []
             ]

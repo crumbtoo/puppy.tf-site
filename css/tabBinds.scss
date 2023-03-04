@@ -6,12 +6,11 @@
     flex-wrap: wrap;
     display: flex;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: space-evenly;
     align-content: flex-start;
     align-items: flex-start;
 
-    padding: 1rem;
-    gap: 12px;
+    row-gap: theme.$useless-gap;
 
     .bind-box
     {
@@ -19,29 +18,35 @@
 
         display: flex;
         flex-direction: row;
-        max-width: 5rem;
+        width: 32%; // slightly less than a third, for three columns
         padding: 0;
+        font-size: 0.8em;
 
-        .key-button
+        .key-name, .bound-to
         {
-            border: 0;
-            margin-left: auto;
-            background: theme.$surface0;
-            order: 1;
-            min-height: 100%;
-            width: 100%;
+            @include theme.cute-shadow;
+            padding: theme.$small-gap;
+            line-height: theme.$line-height;
+            overflow: scroll;
+            border: none;
+            font-family: theme.$primary-font;
+            color: theme.$text;
         }
 
         .key-name
         {
-            max-width: 70%;
-            font-family: theme.$primary_font;
-            color: theme.$text;
-            font-size: 1em;
+            background: theme.$surface0;
+            width: 34%; // unrelated to the .bind-box, just happens to be 33
+        }
+
+        .bound-to
+        {
+            width: 100%;
             background: theme.$surface2;
-            border: 0;
-            text-decoration: none;
+            margin: auto;
+            margin-right: 0;
+            text-align: right;
+            order: 1;
         }
     }
-
 }

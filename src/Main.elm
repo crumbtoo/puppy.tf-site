@@ -81,6 +81,7 @@ update msg model =
             , Cmd.none
             )
 
+
 view : Model -> Browser.Document Msg
 view model =
     let frag = Maybe.withDefault "" model.url.fragment in
