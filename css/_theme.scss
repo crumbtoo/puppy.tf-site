@@ -73,3 +73,13 @@ $accent:	$mauve;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.6);
 }
 
+@mixin box
+{
+    background: $surface0;
+    border-radius: $border-radius;
+    padding: 0.2rem;
+    font-size: 0.9em;
+
+    @include cute-shadow;
+}
+

@@ -27,4 +27,22 @@ genGroupBinds set group =
     |> (\_ -> Nothing)
 
 tabHTML : Config msg -> Html msg
-tabHTML cfg = div [] [ text "uhh...." ]
+tabHTML cfg = Dict.toList cfg.binds
+    |> List.map (\ (k,v) ->
+        div
+            [ class "box bind-box"
+            ]
+            [ input
+                [ class "key-name"
+                , type_ "text"
+                , value k
+                ]
+                []
+            , button
+                [ class "key-button"
+                ]
+                []
+            ]
+    )
+    |> div [ class "binds-container" ]
+

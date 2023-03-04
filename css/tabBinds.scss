@@ -1,0 +1,47 @@
+@use "theme";
+
+.binds-container
+{
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: flex-start;
+    align-items: flex-start;
+
+    padding: 1rem;
+    gap: 12px;
+
+    .bind-box
+    {
+        @include theme.box;
+
+        display: flex;
+        flex-direction: row;
+        max-width: 5rem;
+        padding: 0;
+
+        .key-button
+        {
+            border: 0;
+            margin-left: auto;
+            background: theme.$surface0;
+            order: 1;
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .key-name
+        {
+            max-width: 70%;
+            font-family: theme.$primary_font;
+            color: theme.$text;
+            font-size: 1em;
+            background: theme.$surface2;
+            border: 0;
+            text-decoration: none;
+        }
+    }
+
+}
