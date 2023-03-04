@@ -33,14 +33,18 @@ viewTab pbinds = pbinds
             [ class "box bind-box"
             ]
             [ input -- TODO: i want to have icons for keys / mouse buttons in the future.
-                [ class "key-name"
+                [ classList
+                    [ ("key-name", True)
+                    ]
                 , type_ "text"
                 , value k
                 , onInput <| \x -> UpdateUserBind i x v
                 ]
                 []
             , input
-                [ class "bound-to"
+                [ classList
+                    [ ("bound-to", True)
+                    ]
                 , type_ "text"
                 , value v
                 , onInput <| \x -> UpdateUserBind i k x
